@@ -1,0 +1,1 @@
+web: gunicorn htech_corporate.wsgi
