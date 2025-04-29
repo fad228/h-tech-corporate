@@ -1,0 +1,70 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+/* Style général */
+section.apropos {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+section.apropos p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* Mode sombre */
+.dark-mode h1,
+.dark-mode p {
+  color: #ffffff;
+}
+section.apropos {
+  background-color: rgba(255, 255, 255, 0.8); /* blanc translucide */
+  padding: 60px 20px;
+  border-radius: 15px;
+}
+.dark-mode section.apropos {
+  background-color: rgba(31, 30, 30, 0.8); /* blanc translucide */
+  padding: 60px 20px;
+  border-radius: 15px;
+}
+
+</style>
+
+
+<body class="light-mode" style="background-image: url('{% static 'main/img/a propos.jpg' %}');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;">
+
+<section class="apropos">
+  <h1>À propos de H-TECH CORPORATE</h1>
+  <p>
+    H-Tech Corporate est un centre de formation professionnelle spécialisé dans les logiciels d'architecture, le dessin assisté par ordinateur et la modélisation 3D.
+Nous proposons des formations de qualité sur des outils comme AutoCAD, Revit, ArchiCAD, SketchUp, Lumion et bien d'autres, destinées aux professionnels, étudiants et passionnés.
+  </p>
+  <p>
+Créée le 17 mars 2024, H-Tech Corporate travaille en collaboration avec Kof Corporation, une entreprise d’édition de logiciels basée à Lomé (Togo), près de la cour d'appel à Agoè Cacaveli.
+Fondée par un regroupement de jeunes experts en informatique.
+  </p>
+  <p>H-Tech Corporate offre également des prestations en architecture et ingénierie :</p>
+<ul>
+  <li>Conception de plans de maisons</li>
+  <li>Dimensionnement de structures</li>
+  <li>Accompagnement pour l'obtention de permis de construire</li>
+  <li>Boost de visibilité</li>
+  <li>Création de sites web</li>
+</ul>
+  <p>
+En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons notre expertise au service de la satisfaction de nos clients.
+  </p>
+
+  <p>
+    Notre objectif est de transmettre des compétences pratiques et concrètes pour favoriser l'insertion professionnelle et
+    l'excellence dans les métiers du bâtiment, du design et de la construction.
+  </p>
+</section>
+</body>
+{% endblock %}

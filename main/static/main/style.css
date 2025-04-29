@@ -1,0 +1,279 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+}
+
+a {
+    text-decoration: black;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+/* Base claire */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* MODE SOMBRE COMPLET */
+  .dark-mode {
+    background-color: #121212;
+    background-image: none;
+    color: #e0e0e0;
+  }
+  
+
+  .dark-mode h2,
+  .dark-mode h0,
+  .dark-mode p1 {
+    color: #ffffff !important;
+  }
+  .dark-mode .bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #092247 !important;
+  }
+  .dark-mode .bg-light h2 {
+    color: #fafafa !important;
+  }
+  .dark-mode .bg-white {
+    --bs-bg-opacity: 1;
+    background-color: #092247 !important;
+}
+.dark-mode .bg-dark p {
+   color: #fcfcfc !important;
+  }
+.dark-mode .bg-white h3,
+.dark-mode .bg-white p,
+.dark-mode .bg-light h3,
+.dark-mode .bg-light p {
+    color: #f1f0f0 !important;
+}
+
+  /* Liens */
+  .dark-mode a {
+    color: #80c1f7 !important;
+  }
+  .dark-mode a:hover {
+    color: #bbdefb !important;
+  }
+  
+  /* Navbar */
+  .dark-mode .navbar {
+    background-color: #1e1e1e !important;
+  }
+  .dark-mode .navbar .nav-link {
+    color: #e0e0e0 !important;
+  }
+  
+  /* Footer */
+  .dark-mode footer {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* Boutons */
+  .dark-mode .btn {
+    color: #e0e0e0 !important;
+    border-color: #90caf9 !important;
+  }
+  .dark-mode .btn-outline-light {
+    color: #90caf9 !important;
+    border-color: #90caf9 !important;
+  }
+  
+  /* Cartes et blocs */
+  .dark-mode .card,
+  .dark-mode .content,
+  .dark-mode .section {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #333;
+  }
+  
+  .dark-mode .hero {
+    color: #050505 !important;
+    border-color: #90caf9 !important;
+  }
+
+
+
+
+  /* Mode sombre général */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+  
+  /* Hero - textes en blanc en mode sombre */
+  body.dark-mode .hero {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  body.dark-mode .hero h2,
+  body.dark-mode .hero p {
+    color: white;
+  }
+  
+  /* About-section - textes en blanc en mode sombre */
+  body.dark-mode .about-section {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  body.dark-mode .about-section h3,
+  body.dark-mode .about-section p {
+    color: white;
+  }
+
+  .services .service h3,
+  .services .service p {
+    color: #000 !important;
+  }
+  
+
+  /*css formation*/
+
+/* Thème clair par défaut */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #007acc, #004080);
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .logo {
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  nav {
+    background-color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    color: #007acc;
+  }
+  
+  section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .formation {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .formation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formation h2 {
+    color: #007acc;
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+  
+  .formation p {
+    font-size: 1em;
+    line-height: 1.6;
+  }
+  
+  footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .header-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    nav {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .formation {
+      padding: 15px;
+    }
+  }
+  
+  /* 🌙 Mode sombre activé avec .dark-mode */
+  .dark-mode {
+    background-color: #0e0d0d;
+    color: #eee;
+  }
+  
+  .dark-mode nav {
+    background-color: #0e0d0d;
+  }
+  
+  .dark-mode nav a {
+    color: #eee;
+  }
+  
+  .dark-mode nav a:hover {
+    color: #66b2ff;
+  }
+  
+  .dark-mode .formation {
+    background-color: #f1ecec;
+    box-shadow: 0 2px 8px rgba(253, 253, 253, 0.05);
+  }
+  
+  .dark-mode h2 {
+    color: #073461;
+  }
+  
+  .dark-mode footer {
+    background-color: #000;
+    color: #999;
+  }
+  
+  .dark-mode h2, .dark-mode h0, .dark-mode p1 {
+    color: #0d2e75ea !important;
+}
+
+.dark-mode .formation p {
+    color: #f0f1f1;
+  }
+  

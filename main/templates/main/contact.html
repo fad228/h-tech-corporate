@@ -1,0 +1,229 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+.contact-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.contact-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #007acc;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color:rgb(255, 255, 255);
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+form button {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #005b99;
+}
+
+/* Mode sombre */
+.dark-mode .contact-container h1 {
+  color: #66bfff;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #555;
+}
+
+.dark-mode form label {
+  color:rgb(221, 218, 218);
+}
+
+.dark-mode form button {
+  background-color: #444;
+}
+
+.dark-mode form button:hover {
+  background-color: #666;
+}
+
+.alert {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.contact-info-box h3 i {
+  margin-right: 8px;
+  color: #007acc;
+}
+/* Effet d'apparition */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.transparent-bg {
+  background-color: rgba(255, 255, 255, 0.48); /* blanc semi-transparent */
+  border-radius: 12px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 1200px;
+  backdrop-filter: blur(3px); /* optionnel : effet de flou derrière */
+}
+.dark-mode .transparent-bg {
+  background-color: rgba(36, 33, 33, 0.5); /* blanc semi-transparent */
+  border-radius: 12px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 1200px;
+  backdrop-filter: blur(3px); /* optionnel : effet de flou derrière */
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  font-size: 30px;
+  padding: 12px 16px;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe5d;
+}
+
+
+</style>
+
+
+<body class="light-mode" style="background-image: url('{% static 'main/img/contact.jpg' %}');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;">
+
+
+<div class="contact-container fade-in">
+
+  <h1>Contactez-nous</h1>
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="email">Adresse e-mail</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="sujet">Sujet</label>
+    <input type="text" id="sujet" name="sujet" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+ <a href="https://wa.me/22897020077?text=Bonjour%20je%20souhaite%20obtenir%20plus%20d'informations%20sur%20vos%20formations"
+   class="whatsapp-float"
+   target="_blank"
+   title="Contactez-nous sur WhatsApp">
+  💬
+</a> 
+</div>
+
+
+
+<section class="contact-info-area pt-100 pb-70 transparent-bg">
+
+  
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="contact-info-box text-center">
+          <div class="icon-box">
+            <i class='bx bx-map'></i>
+          </div>
+          <h3>Notre adresse</h3>
+          <p>Agoè Minamadou à côté de ESA, Lomé, TOGO.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="contact-info-box text-center">
+          <div class="icon-box">
+            <i class='bx bx-phone'></i>
+          </div>
+          <h3>Contact</h3>
+          <p>Téléphone: <a href="tel:+22898700015">+228 98700015 +228 70239406</a></p>
+          <p>Email: <a href="mailto:htechcorporatetogo@gmail.com">htechcorporatetogo@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="contact-info-box text-center">
+          <div class="icon-box">
+            <i class='bx bx-time-five'></i>
+          </div>
+          <h3>Heures d'ouverture</h3>
+          <p>Lundi - Samedi: 08:00 - 18:00</p>
+          <p>Dimanche: Fermé</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'main/style.css' %}">
+
+<style>
+.team-section {
+  padding: 80px 20px;
+  background-color:rgb(186, 191, 209);
+  text-align: center;
+}
+.dark-mode .team-section {
+    background-color:rgb(65, 59, 59);
+}
+.team-section h1 {
+  color: #007acc;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+.team-member {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.team-member:hover {
+  transform: translateY(-5px);
+}
+.team-member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+.team-member h3 {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+.team-member p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+.team-member .social-icons a {
+  margin: 0 5px;
+  color: #007acc;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+.team-member .social-icons a:hover {
+  color: #005b99;
+}
+</style>
+
+
+<body class="light-mode" style="background-image: url('{% static 'main/img/formation.jpg' %}');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;">
+
+<section class="team-section">
+  <h1>Notre Équipe</h1>
+  <div class="team-grid">
+    
+    <div class="team-member">
+      <img src="{% static 'images/hassane.jpg' %}" alt="Hassane">
+      <h3>Hassane AMADOU</h3>
+      <p>Fondateur & Ingénieur génie civil</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+        <a href="#"><i class="bx bxl-github"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="{% static 'images/brigitte.jpg' %}" alt="Brigitte">
+      <h3>Brigitte GBEDESSI</h3>
+      <p>Sécrétaire Comptable</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-instagram"></i></a>
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="{% static 'images/fadil.jpg' %}" alt="Fadil">
+      <h3>Fadil EKPAYE</h3>
+      <p>Responsable pédagogique</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+      </div>
+    </div>
+
+    <!-- Ajoute d'autres membres ici -->
+
+  </div>
+</section>
+</body>
+{% endblock %}

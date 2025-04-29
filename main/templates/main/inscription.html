@@ -1,0 +1,117 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+body {
+  background-image: url('{% static "main/img/inscrit.jpg" %}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+}
+
+
+.inscription-container {
+  max-width: 600px;
+  margin: 80px auto;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.inscription-container h2 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 30px;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  background: #f9f9f9;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 14px;
+  margin-top: 20px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #005b99;
+}
+
+.alert {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: #25D366;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+</style>
+
+<body class="light-mode" style="background-image: url('{% static 'main/img/inscrit.jpg' %}');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;">
+<div class="inscription-container">
+  <h2>Inscription à une formation</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">S'inscrire</button>
+  </form>
+</div>
+
+</body>
+
+{% endblock %}
