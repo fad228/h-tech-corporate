@@ -75,7 +75,7 @@ def inscription_view(request):
 
             # Redirection vers un lien WhatsApp avec infos préremplies
             return redirect(
-                f"https://wa.me/22897020077?text=Nouvelle%20inscription%20de%20{form.cleaned_data['nom']}%20pour%20la%20formation%20{form.cleaned_data['formation']}"
+                f"https://wa.me/22898700015?text=Nouvelle%20inscription%20de%20{form.cleaned_data['nom']}%20pour%20la%20formation%20{form.cleaned_data['formation']}"
             )
     else:
         form = InscriptionForm()
