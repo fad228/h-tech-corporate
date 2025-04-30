@@ -1,7 +1,7 @@
    # Create your models here.
 from django.db import models
 from django.utils import timezone
-
+from cloudinary.models import CloudinaryField
 
 class Formation(models.Model):
     titre = models.CharField(max_length=100)
@@ -51,7 +51,7 @@ class MediaTemoignage(models.Model):
         ('video', 'Vidéo'),
     )
     media_type = models.CharField(max_length=5, choices=MEDIA_TYPE_CHOICES)
-    fichier = models.FileField(upload_to='temoignages_media/')
+    fichier = CloudinaryField('media') 
     description = models.CharField(max_length=255, blank=True)
 
     def __str__(self):

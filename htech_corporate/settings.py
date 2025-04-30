@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'cloudinary_storage',
+    'cloudinary',
+
 ]
 
 MIDDLEWARE = [
@@ -160,3 +163,16 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# Ces valeurs viennent de ton tableau de bord Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'ds8trpdyl',
+    'API_KEY': '657636894378273',
+    'API_SECRET': 'Z5Qgqz13_jpju59xoop0CcptSiw'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
