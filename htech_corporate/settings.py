@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'main',
     'cloudinary_storage',
     'cloudinary',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
 ]
 
