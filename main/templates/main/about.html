@@ -66,5 +66,20 @@ En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons 
     l'excellence dans les métiers du bâtiment, du design et de la construction.
   </p>
 </section>
+
+<!-- Bande des collaborateurs -->
+<div style="background-color:rgb(108, 117, 125); padding: 20px; margin-top: 40px;">
+  <h3 style="text-align: center;">Nos collaborateurs</h3>
+  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      {% for c in collaborateurs %}
+          <div style="text-align: center;">
+              <img src="{{ c.photo.url }}" alt="{{ c.nom }}" style="border-radius: 50%;">
+              <p>{{ c.nom }}</p>
+              <small>{{ c.poste }}</small>
+          </div>
+      {% endfor %}
+  </div>
+</div>
+
 </body>
 {% endblock %}

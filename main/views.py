@@ -5,15 +5,21 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from .forms import TemoignageForm
+from .models import Collaborateur
+from .models import VideoPublicitaire
 
 
 def home(request):
     formations = Formation.objects.all()[:3]
     temoignages = Temoignage.objects.all()[:2]
-    return render(request, 'main/home.html', {'formations': formations, 'temoignages': temoignages})
+    video_pub = VideoPublicitaire.objects.order_by('-date_ajout').first()
+    return render(request, 'main/home.html', {'formations': formations, 'temoignages': temoignages, 'video_pub': video_pub})
+
 
 def about(request):
-    return render(request, 'main/about.html')
+    collaborateurs = Collaborateur.objects.all()
+    return render(request, 'main/about.html', {'collaborateurs': collaborateurs})
+
 
 def formations(request):
     formations = Formation.objects.all()

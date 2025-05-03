@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 import os
 import dj_database_url
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +33,7 @@ SECRET_KEY = 'django-insecure-)g^h_*)bz9j+&3@)n+rhko4(vs=)2!t8llh%m_v$p3uu17w3e6
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['h-tech-corporate.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'h-tech-corporate.onrender.com']
 
 
 # Application definition
@@ -143,7 +147,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # ou ton fournisseur SMTP
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'fadilekpaye@email.com'
+EMAIL_HOST_USER = 'fadilekpaye@gmail.com'
 EMAIL_HOST_PASSWORD = 'uzyv bssy olal axmo'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -164,15 +168,17 @@ else:
         }
     }
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
 
 # Ces valeurs viennent de ton tableau de bord Cloudinary
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'ds8trpdyl',
-    'API_KEY': '657636894378273',
-    'API_SECRET': 'Z5Qgqz13_jpju59xoop0CcptSiw'
+    'API_KEY': '337869537696912',
+    'API_SECRET': 'gYKPZ8alBgzXdFByRAC0hlwziQE'
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config( 
+  cloud_name = CLOUDINARY_STORAGE['CLOUD_NAME'], 
+  api_key = CLOUDINARY_STORAGE['API_KEY'], 
+  api_secret = CLOUDINARY_STORAGE['API_SECRET'] 
+)

@@ -228,10 +228,10 @@
                 <p class="text-muted small">{{ temoignage.date|date:"d/m/Y H:i" }}</p>
                 
                 <!-- Bouton supprimer -->
-                <form method="post" action="{% url 'supprimer_temoignage' temoignage.id %}" style="display:inline;">
+               <!-- <form method="post" action="{% url 'supprimer_temoignage' temoignage.id %}" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Es-tu sûr de vouloir supprimer ce témoignage ?');">Supprimer</button>
-                </form>
+                </form> -->
             </div>
         </div>
     {% empty %}
