@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://h-tech-corporate.onrender.com/sitemap.xml
