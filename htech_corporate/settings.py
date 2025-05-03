@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-
 ]
 
 SITE_ID = 1
