@@ -2,8 +2,6 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 class StaticViewSitemap(Sitemap):
-    priority = 0.5
-    changefreq = 'weekly'
 
     def items(self):
         # Remplace les noms ici par les noms de tes vues nommées
