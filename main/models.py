@@ -50,7 +50,7 @@ class MediaTemoignage(models.Model):
         ('photo', 'Photo'),
         ('video', 'Vidéo'),
     )
-    media_type = models.CharField(max_length=5, choices=MEDIA_TYPE_CHOICES)
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES)
     fichier = CloudinaryField('media') 
     description = models.CharField(max_length=255, blank=True)
 
