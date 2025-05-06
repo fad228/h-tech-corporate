@@ -51,13 +51,15 @@ class MediaTemoignage(models.Model):
         ('video', 'Vidéo'),
     )
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES)
-    fichier = CloudinaryField('media') 
+    fichier = CloudinaryField('media', resource_type='video')
     description = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return f"{self.media_type} - {self.description}"
     
-  
+class video(models.Model):
+    titre = models.CharField(max_length=100)
+    fichier = CloudinaryField('video', resource_type='video')
 
 class Collaborateur(models.Model):
     nom = models.CharField(max_length=100)
