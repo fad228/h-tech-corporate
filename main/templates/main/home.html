@@ -198,23 +198,16 @@ body.dark-mode {
         </video>
         <p>{{ video.description }}</p>
         {% if video.lien_action %}
-            <a href="{{ video.lien_action }}" class="btn btn-primary">Voir plus</a>
+            <a href="{{ video.lien_action }}" class="btn btn-primary">S’inscrire maintenant</a>
         {% endif %}
     </div>
 {% else %}
     <p>Aucune vidéo disponible pour le moment.</p>
 {% endif %}
 
-    {% if video.lien_action %}
-    <div style="margin-top: 10px;">
-        <a href="{{ video.lien_action }}" class="btn btn-primary" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
-            S’inscrire maintenant
-        </a>
-    </div>
-    {% endif %}
 
 </section>
-{% endif %}
+
 
 
 
