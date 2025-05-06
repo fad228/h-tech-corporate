@@ -12,8 +12,8 @@ from .models import VideoPublicitaire
 def home(request):
     formations = Formation.objects.all()[:3]
     temoignages = Temoignage.objects.all()[:2]
-    video_pub = VideoPublicitaire.objects.order_by('-date_ajout').first()
-    return render(request, 'main/home.html', {'formations': formations, 'temoignages': temoignages, 'video_pub': video_pub})
+    video = VideoPublicitaire.objects.last()
+    return render(request, 'main/home.html', {'formations': formations, 'temoignages': temoignages, 'video': video})
 
 
 def about(request):
@@ -114,3 +114,8 @@ def contact_view(request):
             messages.error(request, "Une erreur s'est produite. Veuillez réessayer.")
 
     return render(request, 'main/contact.html')
+
+
+
+
+

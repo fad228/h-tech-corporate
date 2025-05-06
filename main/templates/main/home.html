@@ -188,27 +188,26 @@ body.dark-mode {
         <p class="lead mt-3">H-TECH CORPORATE est une entreprise innovante et multidisciplinaire, spécialisée dans les solutions technologiques et les services à forte valeur ajoutée. Notre expertise s’étend sur plusieurs domaines clés :</p>
     </div>
 </section>
+{% load cloudinary %}
 
-<!-- À la une - Vidéo publicitaire -->
-{% if video_pub %}
-<section class="a-la-une-title" style="margin: 40px 0; padding: 20px; background-color: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center;">
-    
-    <h2 style="font-size: 2.5rem; font-weight: bold;">📢 À la une</h2>
-    
-    <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 20px;">
-        <video style="max-width: 100%; width: 100%; max-height: 500px;" controls>
-            <source src="{{ video.fichier.url }}" type="video/mp4">
-            Votre navigateur ne prend pas en charge la lecture de la vidéo.
+{% if video %}
+    <div class="video-container">
+        <video width="100%" controls>
+            <source src="{% cloudinary video.fichier format='mp4' %}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de cette vidéo.
         </video>
+        <p>{{ video.description }}</p>
+        {% if video.lien_action %}
+            <a href="{{ video.lien_action }}" class="btn btn-primary">Voir plus</a>
+        {% endif %}
     </div>
+{% else %}
+    <p>Aucune vidéo disponible pour le moment.</p>
+{% endif %}
 
-    {% if video_pub.description %}
-    <p style="text-align: center; max-width: 600px; margin: 20px auto;">{{ video_pub.description }}</p>
-    {% endif %}
-
-    {% if video_pub.lien_action %}
+    {% if video.lien_action %}
     <div style="margin-top: 10px;">
-        <a href="{{ video_pub.lien_action }}" class="btn btn-primary" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+        <a href="{{ video.lien_action }}" class="btn btn-primary" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
             S’inscrire maintenant
         </a>
     </div>

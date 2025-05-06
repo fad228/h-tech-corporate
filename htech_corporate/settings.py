@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)g^h_*)bz9j+&3@)n+rhko4(vs=)2!t8llh%m_v$p3uu17w3e6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'h-tech-corporate.onrender.com']
@@ -152,7 +152,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # ou ton fournisseur SMTP
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'htechcorporatetogo@gmail.com'
-EMAIL_HOST_PASSWORD = 'uzyv bssy olal axmo'
+EMAIL_HOST_PASSWORD = 'uhas ehwv qbtv dprc'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 MEDIA_URL = '/media/'
