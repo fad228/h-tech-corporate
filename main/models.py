@@ -74,7 +74,7 @@ class Collaborateur(models.Model):
 
 class VideoPublicitaire(models.Model):
     titre = models.CharField(max_length=200)
-    fichier = CloudinaryField(resource_type='video')  # attention : pas de 'media' ici
+    fichier = CloudinaryField('media', resource_type='video')  # attention : pas de 'media' ici
     description = models.TextField(blank=True, null=True)
     lien_action = models.URLField(blank=True, null=True, help_text="Lien du bouton (ex: inscription)")
     date_ajout = models.DateTimeField(auto_now_add=True)
