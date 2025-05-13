@@ -7,7 +7,8 @@ from django.contrib import messages
 from .forms import TemoignageForm
 from .models import Collaborateur
 from .models import VideoPublicitaire
-
+from .models import Service, DemandeService
+from .forms import DemandeServiceForm
 
 def home(request):
     formations = Formation.objects.all()[:3]
@@ -105,7 +106,7 @@ def contact_view(request):
                 sujet,
                 contenu,
                 settings.DEFAULT_FROM_EMAIL,
-                ["fadilekpaye@email.com"],  # Remplace par ton adresse email
+                ["htechcorporatetogo@gmail.com"],  # Remplace par ton adresse email
                 fail_silently=False,
             )
             messages.success(request, "Votre message a bien été envoyé.")
@@ -117,5 +118,29 @@ def contact_view(request):
 
 
 
+def service(request):
+    service = Service.objects.all()
+    form = DemandeServiceForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        
+        service_nom = form.cleaned_data['service']
+        nom = form.cleaned_data['nom_utilisateur']
+        email = form.cleaned_data['email']
+        telephone = form.cleaned_data['telephone']
+
+        send_mail(
+            subject="Nouvelle demande de service",
+            message=f"Service demandé : {service_nom}\nNom : {nom}\nEmail : {email}\nTéléphone : {telephone}",
+            from_email='htechcorporatetogo@gmail.com',
+            recipient_list=['htechcorporatetogo@gmail.com'],  # ton email ici
+            fail_silently=False,
+        )
+
+        messages.success(request, "Votre demande a été envoyée avec succès.")
+        return redirect('prestation') 
+    return render(request, 'main/service.html', {'service': service, 'form': form})
+
+    
 
 

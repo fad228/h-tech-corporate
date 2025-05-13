@@ -1,7 +1,7 @@
 from django import forms
 from .models import Inscription
-from django import forms
 from .models import Temoignage
+from .models import DemandeService
 
 FORMATION_CHOICES = [
     ('', 'Choisissez une formation...'),
@@ -38,3 +38,15 @@ class TemoignageForm(forms.ModelForm):
     class Meta:
         model = Temoignage
         fields = ['nom', 'message']
+
+
+
+
+class DemandeServiceForm(forms.ModelForm):
+    class Meta:
+        model = DemandeService
+        fields = ['service', 'nom_utilisateur', 'email', 'telephone']
+from django import forms
+from .models import DemandeService
+
+

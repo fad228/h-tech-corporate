@@ -51,7 +51,7 @@ class MediaTemoignage(models.Model):
         ('video', 'Vidéo'),
     )
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES)
-    fichier = CloudinaryField('media', resource_type='video')
+    fichier = CloudinaryField('media', resource_type='auto')
     description = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
@@ -82,3 +82,39 @@ class VideoPublicitaire(models.Model):
     def __str__(self):
         return self.titre
 
+
+
+
+class Service(models.Model):
+    nom = models.CharField(max_length=100)
+    description = models.TextField()
+    prix_min = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    prix_max = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    contact_direction = models.BooleanField(default=False)
+    def __str__(self):
+        return self.nom
+
+    @property
+    def prix_affiche(self):
+        
+        if self.contact_direction:
+            return "Veuillez contacter la direction pour plus d'informations"
+        elif self.prix_min and self.prix_max:
+            return f"{self.prix_min:,} – {self.prix_max:,} FCFA"
+        elif self.prix_min:
+            return f"À partir de {self.prix_min:,} FCFA"
+        else:
+            return "Prix non défini"
+
+
+
+
+class DemandeService(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    nom_utilisateur = models.CharField(max_length=255)
+    email = models.EmailField()
+    telephone = models.CharField(max_length=20)
+    date_demande = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nom_utilisateur} - {self.service.nom}"
