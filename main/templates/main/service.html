@@ -132,7 +132,7 @@
             <h3>{{ service.nom }}</h3>
         </div>
         <div class="service-detail" id="detail-{{ service.id }}">
-            <p>{{ service.description }}</p>
+            <p>{{ service.description|linebreaksbr }}</p>
             <p><strong>Prix :</strong> {{ service.prix_affiche }}</p>
             <button class="close-btn" onclick="event.stopPropagation(); closeDetail('detail-{{ service.id }}')">Fermer</button>
         </div>
