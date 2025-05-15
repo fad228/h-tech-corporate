@@ -76,7 +76,7 @@ En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons 
   <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
       {% for c in collaborateurs %}
           <div style="text-align: center;">
-              <img src="{{ c.photo.url }}" alt="{{ c.nom }}" style="border-radius: 50%;">
+              <img src="{{ c.fichier.url }}" alt="{{ c.nom }}" style="border-radius: 50%;">
               <p>{{ c.nom }}</p>
               <small>{{ c.poste }}</small>
           </div>
