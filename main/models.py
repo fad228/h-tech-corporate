@@ -63,7 +63,7 @@ class video(models.Model):
 
 class Collaborateur(models.Model):
     nom = models.CharField(max_length=100)
-    photo = CloudinaryField('media', resource_type='photo')
+    fichier = CloudinaryField('media', resource_type='image')
     poste = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
