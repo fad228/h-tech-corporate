@@ -4,6 +4,13 @@
 <link rel="stylesheet" href="{% static 'main/style.css' %}">
 
 <style>
+
+.head-section {
+  padding: 80px 20px;
+  background-color:rgb(186, 191, 209);
+  text-align: center;
+}
+
 .team-section {
   padding: 80px 20px;
   background-color:rgb(186, 191, 209);
@@ -71,10 +78,23 @@ background-size: cover;
 background-position: center;
 background-repeat: no-repeat;">
 
-<section class="team-section">
+<section class="head-section">
   <h1>Notre Équipe</h1>
   <div class="team-grid">
     
+    <div class="team-member">
+      <img src="{% static 'main/img/Omar.jpeg' %}" alt="Omar">
+      <h3>Omar Farouk KOUGBADA</h3>
+      <p>Responsable des formations</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+        <a href="#"><i class="bx bxl-github"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="team-grid">
     <div class="team-member">
       <img src="{% static 'main/img/hassane.jpeg' %}" alt="Hassane">
       <h3>Hassane AMADOU</h3>
@@ -114,7 +134,17 @@ background-repeat: no-repeat;">
     </div>
 
     <div class="team-member">
-      <img src="{% static 'main/img/Yasser.jpg' %}" alt="Yasser">
+      <img src="{% static 'main/img/Fredy.jpeg' %}" alt="Fredy">
+      <h3>Fredy Biova GBESSO</h3>
+      <p>Graphiste monteur vidéo</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+        <a href="#"><i class="bx bxl-github"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="{% static 'main/img/yass.jpeg' %}" alt="Yasser">
       <h3>DAMTARE Yasser</h3>
       <p>Prof en AutoCad, Covadis, Qgis, Arcgis</p>
       <div class="social-icons">
