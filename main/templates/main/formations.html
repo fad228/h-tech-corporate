@@ -5,59 +5,118 @@
 <link rel="stylesheet" href="{% static 'main/style.css' %}">
 
 <style>
-.dark-mode .formation p {
-  color: #181616 !important;
+/* ---- Section formations ---- */
+section.formations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ---- Carte formation ---- */
+.formation {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.formation:hover {
+  transform: translateY(-5px);
+}
+
+.formation h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #0e168b;
+}
+
+.formation p {
+  font-size: 1em;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* ---- Mode sombre ---- */
+.dark-mode .formation {
+  background: rgba(31, 30, 30, 0.9);
+  color: #fff;
 }
 .dark-mode .formation h2 {
-  color:rgb(14, 22, 139) !important;
+  color: #3f47b1ff !important;
 }
-  </style>
-  <title>formations | H-tech Corporate</title>
+.dark-mode .formation p {
+  color: #f1f1f1 !important;
+}
+
+/* ---- Responsive ajustements ---- */
+@media (max-width: 600px) {
+  .formation h2 {
+    font-size: 1.3em;
+  }
+  .formation p {
+    font-size: 0.95em;
+  }
+}
+</style>
+
+<title>Formations | H-tech Corporate</title>
 <meta name="description" content="Brève description de la page">
 <meta name="robots" content="index, follow">
 
-  <body class="light-mode" style="background-image: url('{% static 'main/img/back.jpg' %}');
+<body class="light-mode" style="background-image: url('{% static 'main/img/back.jpg' %}');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;">
-  <section>
-     <div class="formation">
+
+  <section class="formations">
+    <div class="formation">
       <h2>Formation ArchiCAD</h2>
       <p>Utilisez ArchiCAD pour la modélisation 3D et la documentation complète de vos projets.</p>
     </div>
+
     <div class="formation">
       <h2>Formation AutoCAD</h2>
       <p>Apprenez à créer des plans techniques avec précision. Niveau débutant à avancé.</p>
     </div>
-   
+
     <div class="formation">
       <h2>Formation Robot Structural Analysis</h2>
       <p>Analysez des structures complexes et réalisez des simulations avancées en génie civil.</p>
     </div>
+
     <div class="formation">
       <h2>Formation Lumion</h2>
       <p>Créez des rendus architecturaux réalistes et des animations impressionnantes en 3D.</p>
     </div>
+
     <div class="formation">
       <h2>Formation 3DS Max</h2>
       <p>Maîtrisez la modélisation, l’animation et le rendu 3D pour l’architecture et le design.</p>
     </div>
+
     <div class="formation">
       <h2>Formation Covadis</h2>
       <p>Réalisez des projets topographiques, routiers et VRD avec Covadis pour AutoCAD.</p>
     </div>
+
     <div class="formation">
       <h2>Formation Excel</h2>
       <p>Apprenez à organiser, analyser et visualiser vos données avec Microsoft Excel.</p>
     </div>
+
     <div class="formation">
       <h2>Formation Word</h2>
       <p>Maîtrisez le traitement de texte, la mise en forme et la création de documents professionnels.</p>
     </div>
+
     <div class="formation">
       <h2>Formation PowerPoint</h2>
       <p>Créez des présentations dynamiques et percutantes avec Microsoft PowerPoint.</p>
     </div>
   </section>
+
 </body>
 {% endblock %}
