@@ -71,7 +71,6 @@ class Collaborateur(models.Model):
 
 
 
-
 class VideoPublicitaire(models.Model):
     titre = models.CharField(max_length=200)
     fichier = CloudinaryField('media', resource_type='video')  # attention : pas de 'media' ici
@@ -118,3 +117,18 @@ class DemandeService(models.Model):
 
     def __str__(self):
         return f"{self.nom_utilisateur} - {self.service.nom}"
+
+
+
+class Media(models.Model):
+    MEDIA_TYPES = [
+        ('image', 'Image'),
+        ('video', 'Vidéo'),
+    ]
+    titre = models.CharField(max_length=255)
+    fichier = models.FileField(upload_to='media/')
+    type = models.CharField(max_length=5, choices=MEDIA_TYPES)
+
+    def __str__(self):
+        return self.titre
+

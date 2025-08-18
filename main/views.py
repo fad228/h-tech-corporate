@@ -9,6 +9,8 @@ from .models import Collaborateur
 from .models import VideoPublicitaire
 from .models import Service, DemandeService
 from .forms import DemandeServiceForm
+from .models import Media
+
 
 def home(request):
     formations = Formation.objects.all()[:3]
@@ -143,4 +145,7 @@ def service(request):
 
     
 
+def galerie(request):
+    medias = Media.objects.all()
+    return render(request, 'main/galerie.html', {'medias': medias})
 

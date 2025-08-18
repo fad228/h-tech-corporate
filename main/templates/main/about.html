@@ -3,67 +3,108 @@
 {% block content %}
 
 <style>
-/* Style général */
+/* Section À propos */
 section.apropos {
-  padding: 60px 20px;
+  padding: 40px 20px;
   max-width: 900px;
   margin: auto;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
-section.apropos p {
-  font-size: 1.1em;
+.dark-mode section.apropos {
+  background-color: rgba(31, 30, 30, 0.85);
+}
+
+section.apropos h1 {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+section.apropos p, section.apropos ul {
+  font-size: 1em;
   line-height: 1.6;
 }
 
-/* Mode sombre */
-.dark-mode h1,
-.dark-mode p {
-  color: #ffffff;
-}
-section.apropos {
-  background-color: rgba(255, 255, 255, 0.8); /* blanc translucide */
-  padding: 60px 20px;
-  border-radius: 15px;
-}
-.dark-mode section.apropos {
-  background-color: rgba(31, 30, 30, 0.8); /* blanc translucide */
-  padding: 60px 20px;
-  border-radius: 15px;
+section.apropos ul {
+  padding-left: 20px;
 }
 
+/* Bande des collaborateurs */
+.collaborateurs {
+  background-color: rgb(108, 117, 125);
+  padding: 30px 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+  color: white;
+}
+
+.collaborateurs h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.collaborateurs .collab-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.collaborateurs .collab-item {
+  text-align: center;
+  width: auto;
+}
+
+.collaborateurs .collab-item img {
+  width: 12vw;         /* s'adapte à la largeur de l'écran */
+  max-width: 100px;    /* taille maximale sur grands écrans */
+  min-width: 60px;     /* taille minimale sur mobiles */
+  height: auto;        /* conserve le ratio */
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  section.apropos {
+    padding: 30px 15px;
+  }
+  section.apropos h1 {
+    font-size: 1.5em;
+  }
+}
 </style>
 
-<title>a propos | H-tech Corporate</title>
+<title>À propos | H-tech Corporate</title>
 <meta name="description" content="Brève description de la page">
 <meta name="robots" content="index, follow">
 
-<body class="light-mode" style="background-image: url('{% static 'main/img/a propos.jpg' %}');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;">
+<body class="light-mode" style="background-image: url('{% static 'main/img/a propos.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
 <section class="apropos">
   <h1>À propos de H-TECH CORPORATE</h1>
   <p>
     H-Tech Corporate est un centre de formation professionnelle spécialisé dans les logiciels d'architecture, le dessin assisté par ordinateur et la modélisation 3D.
-Nous proposons des formations de qualité sur des outils comme AutoCAD, Revit, ArchiCAD, SketchUp, Lumion et bien d'autres, destinées aux professionnels, étudiants et passionnés.
+    Nous proposons des formations de qualité sur des outils comme AutoCAD, Revit, ArchiCAD, SketchUp, Lumion et bien d'autres, destinées aux professionnels, étudiants et passionnés.
   </p>
   <p>
-Créée le 17 mars 2024, H-Tech Corporate travaille en collaboration avec Kof Corporation, une entreprise d’édition de logiciels basée à Lomé (Togo), près de la cour d'appel à Agoè Cacaveli.
-Fondée par un regroupement de jeunes experts en informatique.
+    Créée le 17 mars 2024, H-Tech Corporate travaille en collaboration avec Kof Corporation, une entreprise d’édition de logiciels basée à Lomé (Togo), près de la cour d'appel à Agoè Cacaveli.
+    Fondée par un regroupement de jeunes experts en informatique.
   </p>
   <p>H-Tech Corporate offre également des prestations en architecture et ingénierie :</p>
-<ul>
-  <li>Conception de plans de maisons</li>
-  <li>Dimensionnement de structures</li>
-  <li>Accompagnement pour l'obtention de permis de construire</li>
-  <li>Boost de visibilité</li>
-  <li>Création de sites web</li>
-</ul>
+  <ul>
+    <li>Conception de plans de maisons</li>
+    <li>Dimensionnement de structures</li>
+    <li>Accompagnement pour l'obtention de permis de construire</li>
+    <li>Boost de visibilité</li>
+    <li>Création de sites web</li>
+  </ul>
   <p>
-En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons notre expertise au service de la satisfaction de nos clients.
+    En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons notre expertise au service de la satisfaction de nos clients.
   </p>
-
   <p>
     Notre objectif est de transmettre des compétences pratiques et concrètes pour favoriser l'insertion professionnelle et
     l'excellence dans les métiers du bâtiment, du design et de la construction.
@@ -71,12 +112,12 @@ En partenariat avec plusieurs entreprises du BTP et du numérique, nous mettons 
 </section>
 
 <!-- Bande des collaborateurs -->
-<div style="background-color:rgb(108, 117, 125); padding: 20px; margin-top: 40px;">
-  <h3 style="text-align: center;">Nos collaborateurs</h3>
-  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+<div class="collaborateurs">
+  <h3>Nos collaborateurs</h3>
+  <div class="collab-list">
       {% for c in collaborateurs %}
-          <div style="text-align: center;">
-              <img src="{{ c.fichier.url }}" alt="{{ c.nom }}" style="border-radius: 50%;">
+          <div class="collab-item">
+              <img src="{{ c.fichier.url }}" alt="{{ c.nom }}">
               <p>{{ c.nom }}</p>
               <small>{{ c.poste }}</small>
           </div>

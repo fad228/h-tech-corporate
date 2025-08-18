@@ -1,0 +1,95 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Galerie Photos</h2>
+    <div class="row g-2" id="photos-gallery">
+        {% for media in medias %}
+            {% if media.type == 'image' %}
+            <div class="col-6 col-sm-4 col-md-3 mb-3">
+                <img src="{{ media.fichier.url }}" class="img-fluid rounded shadow-sm gallery-img" alt="{{ media.titre }}"
+                     data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="image" data-src="{{ media.fichier.url }}" data-title="{{ media.titre }}">
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2 class="text-center mb-4 mt-5">Galerie Vidéos</h2>
+    <div class="row g-2" id="videos-gallery">
+        {% for media in medias %}
+            {% if media.type == 'video' %}
+            <div class="col-6 col-sm-4 col-md-3 mb-3">
+                <video class="img-fluid rounded shadow-sm gallery-img" muted
+                       data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="video" data-src="{{ media.fichier.url }}" data-title="{{ media.titre }}">
+                    <source src="{{ media.fichier.url }}" type="video/mp4">
+                </video>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="mediaModal" tabindex="-1" aria-labelledby="mediaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white" id="mediaModalLabel"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center p-2">
+        <img id="modalImage" class="img-fluid d-none" alt="">
+        <video id="modalVideo" class="img-fluid d-none" controls>
+          <source id="modalVideoSrc" src="" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.gallery-img {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.gallery-img:hover {
+    transform: scale(1.05);
+}
+@media (max-width: 576px) {
+    .modal-dialog { max-width: 95%; }
+}
+@media (max-width: 768px) {
+    .gallery-img { border-radius: 8px; }
+}
+</style>
+
+<script>
+var mediaModal = document.getElementById('mediaModal');
+mediaModal.addEventListener('show.bs.modal', function (event) {
+    var trigger = event.relatedTarget;
+    var type = trigger.getAttribute('data-type');
+    var src = trigger.getAttribute('data-src');
+    var title = trigger.getAttribute('data-title');
+
+    var modalTitle = mediaModal.querySelector('.modal-title');
+    var modalImage = document.getElementById('modalImage');
+    var modalVideo = document.getElementById('modalVideo');
+    var modalVideoSrc = document.getElementById('modalVideoSrc');
+
+    modalTitle.textContent = title;
+
+    if(type === 'image'){
+        modalImage.src = src;
+        modalImage.classList.remove('d-none');
+        modalVideo.classList.add('d-none');
+        modalVideo.pause();
+    } else if(type === 'video'){
+        modalVideoSrc.src = src;
+        modalVideo.load();
+        modalVideo.classList.remove('d-none');
+        modalImage.classList.add('d-none');
+    }
+});
+</script>
+{% endblock %}
