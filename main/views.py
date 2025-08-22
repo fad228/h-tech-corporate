@@ -149,3 +149,77 @@ def galerie(request):
     medias = Media.objects.all()
     return render(request, 'main/galerie.html', {'medias': medias})
 
+
+# views.py
+from django.shortcuts import render, get_object_or_404
+from .models import Produit
+
+def boutique(request):
+    produits = Produit.objects.all()
+    return render(request, "boutique/boutique.html", {"produits": produits})
+
+def produit_detail(request, produit_id):
+    produit = get_object_or_404(Produit, id=produit_id)
+    return render(request, "boutique/detail.html", {"produit": produit})
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Produit
+
+
+
+# Supprimer un produit du panier
+def supprimer_du_panier(request, produit_id):
+    panier = request.session.get('panier', {})
+    if str(produit_id) in panier:
+        del panier[str(produit_id)]
+        request.session['panier'] = panier
+    return redirect('panier')
+
+
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import Produit
+from django.contrib import messages
+
+def ajouter_au_panier(request, produit_id):
+    produit = get_object_or_404(Produit, id=produit_id)
+    panier = request.session.get('panier', {})
+
+    if str(produit_id) in panier:
+        panier[str(produit_id)]['quantite'] += 1
+    else:
+        panier[str(produit_id)] = {
+            'nom': produit.nom,
+            'prix': float(produit.prix),
+            'quantite': 1,
+            'image': produit.image.url if produit.image else ""
+        }
+
+    request.session['panier'] = panier
+    request.session.modified = True
+
+    messages.success(request, f"{produit.nom} ajouté au panier !")
+    return redirect('boutique')
+
+
+
+def panier(request):
+    panier = request.session.get('panier', {})
+    total = 0
+    for item in panier.values():
+        total += item['prix'] * item['quantite']
+    return render(request, 'boutique/panier.html', {'panier': panier, 'total': total})
+
+
+from django.shortcuts import redirect
+
+def modifier_quantite(request, key):
+    if request.method == "POST":
+        quantite = int(request.POST.get('quantite', 1))
+        panier = request.session.get('panier', {})
+        if key in panier:
+            panier[key]['quantite'] = quantite
+            panier[key]['total'] = panier[key]['prix'] * quantite
+            request.session['panier'] = panier
+    return redirect('panier')

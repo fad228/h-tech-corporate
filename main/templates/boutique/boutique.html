@@ -1,0 +1,264 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5 text-center">
+    <!-- Ruban Boutique -->
+    <span class="ribbon">🛍️ Notre Boutique</span>
+</div>
+
+<!-- Icône panier flottante -->
+<div class="cart-icon position-fixed" onclick="goToCart()">
+    🛒 <span id="cart-count" class="cart-count">{{ request.session.panier|length|default:"0" }}</span>
+</div>
+
+<div class="container mt-5">
+  <div class="row g-4">
+    {% for produit in produits %}
+      <div class="col-6 col-sm-3">
+        <div class="card h-100 text-center shadow produit-card border-0 rounded-3 position-relative">
+
+          <!-- Image avec lightbox -->
+          <img src="{{ produit.image.url }}" class="card-img-top img-fluid produit-img"
+               alt="{{ produit.nom }}" data-bs-toggle="modal" data-bs-target="#lightboxModal{{ produit.id }}">
+
+          <div class="card-body">
+            <h5 class="card-title produit-nom">{{ produit.nom }}</h5>
+            <p class="card-text fw-bold text-success produit-prix">{{ produit.prix }} FCFA</p>
+
+            <!-- Boutons -->
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-sm btn-dark toggle-details" type="button" data-id="{{ produit.id }}">
+                Voir Détails
+              </button>
+              <form method="POST" action="{% url 'ajouter_au_panier' produit.id %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-warning text-white btn-custom">
+                  <i class="bi bi-cart-fill"></i> Commander
+                </button>
+              </form>
+            </div>
+
+            <!-- Caractéristiques déroulantes -->
+            <div class="details-collapse mt-2" id="details{{ produit.id }}">
+              {% if produit.caracteristiques %}
+                <div class="card card-body text-start">
+                  <h6 class="fw-bold">Caractéristiques :</h6>
+                  <p>{{ produit.caracteristiques }}</p>
+                </div>
+              {% else %}
+                <div class="card card-body text-start">
+                  <p>Aucune caractéristique disponible.</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Lightbox -->
+      <div class="modal fade" id="lightboxModal{{ produit.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content bg-transparent border-0">
+            <div class="modal-body p-0">
+              <img src="{{ produit.image.url }}" class="img-fluid rounded-3" alt="{{ produit.nom }}">
+            </div>
+            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Notification -->
+<div id="notification" class="notification"></div>
+
+<style>
+/* --- Background dégradé pour toute la page --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f, #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Animation dégradé */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Ruban Boutique --- */
+.ribbon {
+    position: relative;
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    font-family: 'Montserrat', sans-serif;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.ribbon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+}
+.ribbon::before,
+.ribbon::after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-style: solid;
+    border-color: transparent;
+    bottom: -10px;
+}
+.ribbon::before {
+    left: -10px;
+    border-width: 10px 10px 0 0;
+    border-top-color: #6a11cb;
+}
+.ribbon::after {
+    right: -10px;
+    border-width: 10px 0 0 10px;
+    border-top-color: #2575fc;
+}
+
+/* --- Produits --- */
+.produit-img {
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+.produit-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.produit-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+.produit-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.produit-nom {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 8px 0 4px;
+}
+.produit-prix {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+/* --- Collapse --- */
+.details-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.details-collapse.active { max-height: 300px; }
+.details-collapse .card-body {
+  background-color: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* --- Panier --- */
+.cart-icon {
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cart-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* --- Notification --- */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.notification.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+/* Responsive */
+@media (max-width: 576px) { .produit-img { height: 120px; } }
+</style>
+
+<script>
+let cartCount = {{ request.session.panier|length|default:"0" }};
+
+// Ajout produit au panier (front + notif)
+function addToCart(productName) {
+  cartCount++;
+  document.getElementById("cart-count").innerText = cartCount;
+
+  let notif = document.getElementById("notification");
+  notif.innerText = productName + " ajouté au panier !";
+  notif.classList.add("show");
+
+  setTimeout(() => { notif.classList.remove("show"); }, 2000);
+}
+
+// Redirection vers la page panier Django
+function goToCart() {
+  window.location.href = "{% url 'panier' %}";
+}
+
+// Détails déroulants
+document.querySelectorAll('.toggle-details').forEach(button => {
+  button.addEventListener('click', () => {
+    const id = button.dataset.id;
+    const details = document.getElementById('details' + id);
+    details.classList.toggle('active');
+    if(details.classList.contains('active')) {
+      details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+{% endblock %}

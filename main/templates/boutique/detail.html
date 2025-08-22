@@ -1,0 +1,65 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex justify-center px-4 py-8">
+    <div class="bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl 
+                max-w-sm w-full p-6 text-center transform transition-transform duration-500 
+                hover:scale-102 hover:shadow-3xl">
+
+        <!-- Image produit avec léger effet de parallaxe -->
+        <div class="flex justify-center mb-5 perspective">
+            <img src="{{ produit.image.url }}" alt="{{ produit.nom }}"
+                 class="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 object-cover rounded-xl shadow-lg
+                        transform transition-transform duration-500 hover:scale-110 hover:rotate-1">
+        </div>
+
+        <!-- Nom du produit -->
+        <h1 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900 tracking-tight"
+            style="font-family: 'Montserrat', sans-serif;">
+            {{ produit.nom }}
+        </h1>
+
+        <!-- Prix -->
+        <p class="text-xl md:text-2xl text-green-600 font-semibold mb-4"
+           style="font-family: 'Montserrat', sans-serif;">
+            {{ produit.prix }} FCFA
+        </p>
+
+        <!-- Description -->
+        <p class="text-gray-700 text-sm md:text-base mb-4 leading-relaxed"
+           style="font-family: 'Lora', serif;">
+            {{ produit.description }}
+        </p>
+
+        <!-- Caractéristiques -->
+        {% if produit.caracteristiques %}
+        <h3 class="text-gray-800 font-semibold text-sm md:text-base uppercase tracking-wider mb-2"
+            style="font-family: 'Montserrat', sans-serif;">
+            Caractéristiques
+        </h3>
+        <p class="text-gray-600 text-xs md:text-sm mb-4 leading-snug"
+           style="font-family: 'Lora', serif;">
+            {{ produit.caracteristiques }}
+        </p>
+        {% endif %}
+
+        <!-- Bouton animé -->
+        <button class="mt-4 bg-yellow-500 text-black font-semibold px-6 py-2 rounded-xl 
+                       shadow-lg hover:bg-yellow-600 hover:scale-105 hover:shadow-xl 
+                       transition-all duration-300 tracking-wide">
+            Ajouter au panier
+        </button>
+
+    </div>
+</div>
+
+<style>
+/* Perspective pour effet léger sur l'image */
+.perspective img {
+    transform-style: preserve-3d;
+}
+
+/* Optionnel : transition douce sur hover de la carte entière */
+</style>
+{% endblock %}

@@ -2,27 +2,38 @@
 
 {% block content %}
 <div class="container my-5">
-    <h2 class="text-center mb-4">Galerie Photos</h2>
-    <div class="row g-2" id="photos-gallery">
+    <!-- Galerie Photos -->
+    <div class="band-title">📷 Galerie Photos</div>
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3" id="photos-gallery">
         {% for media in medias %}
             {% if media.type == 'image' %}
-            <div class="col-6 col-sm-4 col-md-3 mb-3">
-                <img src="{{ media.fichier.url }}" class="img-fluid rounded shadow-sm gallery-img" alt="{{ media.titre }}"
-                     data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="image" data-src="{{ media.fichier.url }}" data-title="{{ media.titre }}">
+            <div class="col">
+                <div class="gallery-card">
+                    <img src="{{ media.fichier.url }}" class="img-fluid rounded gallery-img"
+                         alt="{{ media.titre }}"
+                         data-bs-toggle="modal" data-bs-target="#mediaModal"
+                         data-type="image" data-src="{{ media.fichier.url }}"
+                         data-title="{{ media.titre }}">
+                </div>
             </div>
             {% endif %}
         {% endfor %}
     </div>
 
-    <h2 class="text-center mb-4 mt-5">Galerie Vidéos</h2>
-    <div class="row g-2" id="videos-gallery">
+    <!-- Galerie Vidéos -->
+    <div class="band-title mt-5">🎥 Galerie Vidéos</div>
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3" id="videos-gallery">
         {% for media in medias %}
             {% if media.type == 'video' %}
-            <div class="col-6 col-sm-4 col-md-3 mb-3">
-                <video class="img-fluid rounded shadow-sm gallery-img" muted
-                       data-bs-toggle="modal" data-bs-target="#mediaModal" data-type="video" data-src="{{ media.fichier.url }}" data-title="{{ media.titre }}">
-                    <source src="{{ media.fichier.url }}" type="video/mp4">
-                </video>
+            <div class="col">
+                <div class="gallery-card">
+                    <video class="img-fluid rounded gallery-img" muted
+                           data-bs-toggle="modal" data-bs-target="#mediaModal"
+                           data-type="video" data-src="{{ media.fichier.url }}"
+                           data-title="{{ media.titre }}">
+                        <source src="{{ media.fichier.url }}" type="video/mp4">
+                    </video>
+                </div>
             </div>
             {% endif %}
         {% endfor %}
@@ -31,15 +42,15 @@
 
 <!-- Modal -->
 <div class="modal fade" id="mediaModal" tabindex="-1" aria-labelledby="mediaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-dark">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content bg-dark text-white rounded-3 shadow-lg">
       <div class="modal-header border-0">
-        <h5 class="modal-title text-white" id="mediaModalLabel"></h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title fw-bold" id="mediaModalLabel"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center p-2">
-        <img id="modalImage" class="img-fluid d-none" alt="">
-        <video id="modalVideo" class="img-fluid d-none" controls>
+        <img id="modalImage" class="img-fluid rounded d-none" alt="">
+        <video id="modalVideo" class="img-fluid rounded d-none" controls>
           <source id="modalVideoSrc" src="" type="video/mp4">
         </video>
       </div>
@@ -48,19 +59,41 @@
 </div>
 
 <style>
+/* Bande titre */
+.band-title {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    color: #fff;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Images & vidéos */
+.gallery-card {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.gallery-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
 .gallery-img {
     width: 100%;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    height: 100%;
+    object-fit: cover;
 }
-.gallery-img:hover {
-    transform: scale(1.05);
-}
+
+/* Responsive modal */
 @media (max-width: 576px) {
-    .modal-dialog { max-width: 95%; }
-}
-@media (max-width: 768px) {
-    .gallery-img { border-radius: 8px; }
+    .modal-dialog { max-width: 95%; margin: auto; }
+    .modal-body img, .modal-body video { max-height: 60vh; }
 }
 </style>
 
