@@ -13,16 +13,6 @@ class Formation(models.Model):
         return self.titre
 
 
-class Temoignage(models.Model):
-    nom = models.CharField(max_length=100)
-    message = models.TextField()
-    date = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.nom
-
-
-
 class Inscription(models.Model):
     nom = models.CharField(max_length=100)
     email = models.EmailField()
@@ -120,27 +110,32 @@ class DemandeService(models.Model):
 
 
 
+from cloudinary.models import CloudinaryField
+
 class Media(models.Model):
     MEDIA_TYPES = [
         ('image', 'Image'),
         ('video', 'Vidéo'),
     ]
     titre = models.CharField(max_length=255)
-    fichier = models.FileField(upload_to='media/')
+    fichier = CloudinaryField('media', resource_type='auto')  # 'auto' détecte image ou video
     type = models.CharField(max_length=5, choices=MEDIA_TYPES)
 
     def __str__(self):
         return self.titre
 
 
+
+
 class Produit(models.Model):
     nom = models.CharField(max_length=200)
     description = models.TextField()
     prix = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to="produits/")
+    image = CloudinaryField('image', blank=True, null=True)  # Image stockée sur Cloudinary
     caracteristiques = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.nom
+
 
 

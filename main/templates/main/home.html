@@ -202,9 +202,28 @@
 <section class="hero bg-light text-center py-5">
     <div class="container">
         <h2 class="display-4 fw-bold">Bienvenue chez H-TECH CORPORATE</h2>
-        <p class="lead mt-3">Votre centre de formation professionnelle en technologie et développement web.</p>
+        <h4 class="mt-5">" La maison des logiciels "</h4>
         <a href="{% url 'formations' %}" class="btn btn-primary btn-lg mt-4">Découvrir nos formations</a>
-        <p class="lead mt-3">H-TECH CORPORATE est une entreprise innovante et multidisciplinaire...</p>
+
+        <p class="lead mt-4">
+            H-TECH CORPORATE est un centre de formation professionnelle innovant, spécialisé dans les technologies et le développement web.
+            Nous offrons des formations pratiques, interactives et adaptées aux besoins du marché.
+        </p>
+
+        <h4 class="mt-5">Notre mission</h4>
+        <p class="lead mt-2">
+            Fournir à chaque apprenant une éducation de qualité, personnalisée selon son rythme, ses capacités et ses objectifs professionnels.
+        </p>
+
+        <h4>Notre vision</h4>
+        <p class="lead mt-2">
+            Devenir le "Harvard togolais" : un centre de référence en excellence éducative, innovation pédagogique et transformation digitale en Afrique.
+        </p>
+
+        <h4>Notre ambition</h4>
+        <p class="lead mt-2">
+            Former 1 million de personnes d’ici 2035, en combinant sciences cognitives, pédagogie moderne et accompagnement personnalisé pour chaque apprenant.
+        </p>
     </div>
 </section>
 
@@ -220,31 +239,38 @@
     {% endif %}
 </div>
 {% else %}
-<p class="text-center">Aucune vidéo disponible pour le moment.</p>
+<p class="text-center mt-3">Aucune vidéo disponible pour le moment.</p>
 {% endif %}
 
 <section class="services">
     <div class="service">
       <img src="{% static 'main/img/cours.jpeg' %}" alt="Formation Présentielle" class="service-img">
       <h3>Formations en présentiel</h3>
-      <p>Des sessions interactives avec des formateurs expérimentés.</p>
+      <p>Participez à des sessions interactives dirigées par des formateurs expérimentés et bénéficiez d’un accompagnement personnalisé.</p>
     </div>
     <div class="service">
       <img src="{% static 'main/img/h_ligne.jpg' %}" alt="Modules en ligne" class="service-img">
       <h3>Modules en ligne</h3>
-      <p>Apprenez à votre rythme grâce à notre plateforme e-learning.</p>
+      <p>Apprenez à votre rythme grâce à notre plateforme e-learning intuitive, accessible partout et à tout moment.</p>
     </div>
     <div class="service">
       <img src="{% static 'main/img/certificat.jpeg' %}" alt="Certifications reconnues" class="service-img">
       <h3>Certifications reconnues</h3>
-      <p>Obtenez des attestations valorisantes pour booster votre carrière.</p>
+      <p>Obtenez des attestations et certifications professionnelles valorisantes, reconnues par le secteur et les entreprises.</p>
     </div>
 </section>
 
 <section class="about-section py-5 bg-white text-center">
     <div class="container">
-        <h3 class="fw-bold">Pourquoi nous choisir ?</h3>
-        <p class="mt-3">Nous offrons des formations pratiques et un accompagnement personnalisé.</p>
+        <h3 class="fw-bold">Pourquoi choisir H-TECH CORPORATE ?</h3>
+        <p class="mt-3">Nous allions expertise technique et pédagogie moderne pour garantir la réussite de chaque apprenant.</p>
+        <ul class="list-unstyled mt-3 text-start">
+            <li>🔹 Une équipe passionnée, engagée pour le succès de chaque apprenant.</li>
+            <li>🔹 Des outils pédagogiques innovants, constamment actualisés.</li>
+            <li>🔹 Une culture de reconnaissance et de soutien pour nos formateurs et apprenants.</li>
+            <li>🔹 Des perspectives concrètes d’évolution professionnelle.</li>
+            <li>🔹 Une ambiance dynamique, motivante et adaptée à la réalité togolaise et africaine.</li>
+        </ul>
     </div>
 </section>
 

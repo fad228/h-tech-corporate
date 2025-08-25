@@ -8,7 +8,7 @@
 /* ---- Section formations ---- */
 section.formations {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 40px 20px;
   max-width: 1200px;
@@ -18,25 +18,29 @@ section.formations {
 /* ---- Carte formation ---- */
 .formation {
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
 }
 .formation:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.formation img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
 .formation h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.1em;
   color: #0e168b;
-}
-
-.formation p {
-  font-size: 1em;
-  line-height: 1.5;
-  color: #333;
+  margin-bottom: 0;
 }
 
 /* ---- Mode sombre ---- */
@@ -47,96 +51,185 @@ section.formations {
 .dark-mode .formation h2 {
   color: #3f47b1ff !important;
 }
-.dark-mode .formation p {
-  color: #f1f1f1 !important;
-}
 
 /* ---- Responsive ajustements ---- */
 @media (max-width: 600px) {
   .formation h2 {
-    font-size: 1.3em;
-  }
-  .formation p {
-    font-size: 0.95em;
+    font-size: 1em;
   }
 }
 </style>
 
 <title>Formations | H-tech Corporate</title>
-<meta name="description" content="Brève description de la page">
-<meta name="robots" content="index, follow">
 
 <body class="light-mode" style="background-image: url('{% static 'main/img/back.jpg' %}');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;">
 
-  <section class="formations">
-    <div class="formation">
-      <h2>Formation ArchiCAD</h2>
-      <p>Logiciel BIM (Building Information Modeling) puissant, utilisé pour la conception architecturale 2D et 3D. ArchiCAD permet de modéliser des bâtiments avec précision, de produire des plans techniques et de générer automatiquement des rendus. Idéal pour les architectes et les bureaux d’études.</p>
-    </div>
+<section class="formations">
 
-    <div class="formation">
-      <h2>Formation AutoCAD</h2>
-      <p>Logiciel de référence en dessin technique assisté par ordinateur (DAO). AutoCAD est utilisé pour créer des plans 2D détaillés et des modèles 3D dans les domaines de l’architecture, du génie civil, de l’électricité et de la mécanique.</p>
-    </div>
+  <!-- ArchiCAD -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation ArchiCAD" 
+       data-description="Logiciel BIM (Building Information Modeling) puissant, utilisé pour la conception architecturale 2D et 3D. ArchiCAD permet de modéliser des bâtiments avec précision, de produire des plans techniques et de générer automatiquement des rendus. Idéal pour les architectes et les bureaux d’études.">
+    <img src="{% static 'main/img/logos/archicad.jpeg' %}" alt="ArchiCAD Logo">
+    <h2>ArchiCAD</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Robot Structural Analysis</h2>
-      <p>Outil avancé d’analyse et de calcul de structures. Il permet d’étudier la résistance, la stabilité et le comportement des bâtiments ou ouvrages d’ingénierie. Indispensable pour les ingénieurs civils et les bureaux de calcul.</p>
-    </div>
+  <!-- AutoCAD -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation AutoCAD" 
+       data-description="Logiciel de référence en dessin technique assisté par ordinateur (DAO). AutoCAD est utilisé pour créer des plans 2D détaillés et des modèles 3D dans les domaines de l’architecture, du génie civil, de l’électricité et de la mécanique.">
+    <img src="{% static 'main/img/logos/autocad.jpeg' %}" alt="AutoCAD Logo">
+    <h2>AutoCAD</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Lumion</h2>
-      <p>Logiciel de rendu 3D en temps réel. Lumion transforme rapidement des modèles 3D en images et animations photoréalistes avec des effets de lumière, végétation, eau et matériaux réalistes. Très prisé en architecture pour des présentations percutantes.</p>
-    </div>
+  <!-- Robot Structural Analysis -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Robot Structural Analysis" 
+       data-description="Outil avancé d’analyse et de calcul de structures. Il permet d’étudier la résistance, la stabilité et le comportement des bâtiments ou ouvrages d’ingénierie. Indispensable pour les ingénieurs civils et les bureaux de calcul.">
+    <img src="{% static 'main/img/logos/robot.jpeg' %}" alt="Robot Logo">
+    <h2>Robot Structural Analysis</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation 3DS Max</h2>
-      <p>Logiciel de modélisation, d’animation et de rendu 3D. Utilisé dans l’architecture, le design, mais aussi dans le cinéma et le jeu vidéo. 3DS Max permet de créer des modèles réalistes et des animations complexes.</p>
-    </div>
+  <!-- Lumion -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Lumion" 
+       data-description="Logiciel de rendu 3D en temps réel. Lumion transforme rapidement des modèles 3D en images et animations photoréalistes avec des effets de lumière, végétation, eau et matériaux réalistes. Très prisé en architecture pour des présentations percutantes.">
+    <img src="{% static 'main/img/logos/lumion.jpeg' %}" alt="Lumion Logo">
+    <h2>Lumion</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Covadis</h2>
-      <p>Extension d’AutoCAD spécialisée dans le génie civil et le topographique. Covadis est utilisé pour les projets routiers, les travaux publics, le nivellement, le calcul de cubatures et la modélisation des terrains.</p>
-    </div>
+  <!-- 3DS Max -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation 3DS Max" 
+       data-description="Logiciel de modélisation, d’animation et de rendu 3D. Utilisé dans l’architecture, le design, mais aussi dans le cinéma et le jeu vidéo. 3DS Max permet de créer des modèles réalistes et des animations complexes.">
+    <img src="{% static 'main/img/logos/3dsmax.jpeg' %}" alt="3DS Max Logo">
+    <h2>3DS Max</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Excel</h2>
-      <p>Excel est un puissant tableur utilisé pour organiser, analyser et interpréter des données.
+  <!-- Covadis -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Covadis" 
+       data-description="Extension d’AutoCAD spécialisée dans le génie civil et le topographique. Covadis est utilisé pour les projets routiers, les travaux publics, le nivellement, le calcul de cubatures et la modélisation des terrains.">
+    <img src="{% static 'main/img/logos/covadis.jpeg' %}" alt="Covadis Logo">
+    <h2>Covadis</h2>
+  </div>
+
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation CypeCad" 
+       data-description="CYPECAD est une application BIM pour la conception, le calcul et le dimensionnement de structures pour le bâtiment et les ouvrages d'art, soumises à des actions verticales, horizontales et à l'action du feu.">
+    <img src="{% static 'main/img/logos/cypecad.jpeg' %}" alt="CypeCad Logo">
+    <h2>CYPECAD</h2>
+  </div>
+
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Twinmotion" 
+       data-description="Twinmotion permet d'insérer un projet dans son environnement dynamique, de le visionner en temps réel, de créer des présentations réalistes et animées à partir de données 3D, pour une prise de décision sur site.">
+    <img src="{% static 'main/img/logos/Twinmotion.jpeg' %}" alt="Twinmotion Logo">
+    <h2>TWINMOTION</h2>
+  </div>
+
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Artlantis" 
+       data-description="Artlantis est un logiciel 3D développé par Abvent. Il est utilisé pour le rendu photoréaliste d'images et d'animations d'architecture.">
+    <img src="{% static 'main/img/logos/Artlantis.jpeg' %}" alt="Artlantis Logo">
+    <h2>ARTLANTIS</h2>
+  </div>
+
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Qgis" 
+       data-description="QGIS peut être utilisé comme logiciel autonome ou comme interface graphique du logiciel SIG GRASS. Il est ainsi possible d'utiliser toute sa puissance d'analyse dans un environnement de travail plus convivial. Il est également possible d'appeler les modules SAGA GIS depuis QGIS.">
+    <img src="{% static 'main/img/logos/QGIS.jpeg' %}" alt="QGIS Logo">
+    <h2>QGIS</h2>
+  </div>
+
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Photoshop" 
+       data-description="Photoshop est un logiciel de la suite Adobe. Ce logiciel de traitement d'image professionnel permet de faire de la retouche photo, du graphisme ou encore du webdesign.">
+    <img src="{% static 'main/img/logos/Photoshop.jpeg' %}" alt="Photoshop Logo">
+    <h2>PHOTOSHOP</h2>
+  </div>
+
+  <!-- Excel -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Excel" 
+       data-description="Excel est un puissant tableur utilisé pour organiser, analyser et interpréter des données.
 👉 Une formation sur Excel vous permettra de maîtriser les calculs automatiques, les graphiques, les tableaux croisés dynamiques, ainsi que l’automatisation des tâches avec les formules et macros.
-C’est un outil incontournable en gestion, finance, comptabilité et analyse de données.</p>
-    </div>
+C’est un outil incontournable en gestion, finance, comptabilité et analyse de données.">
+    <img src="{% static 'main/img/logos/excel.jpeg' %}" alt="Excel Logo">
+    <h2>Excel</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Word</h2>
-      <p>Microsoft Word est un logiciel de traitement de texte qui permet de rédiger, mettre en page et formater des documents professionnels (rapports, lettres, CV, mémoires, e-books, etc.).
-👉 Avec une formation sur Word, vous apprendrez à utiliser les styles, insérer des images et tableaux, créer des sommaires automatiques et produire des documents clairs et bien structurés.</p>
-    </div>
+  <!-- Word -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Word" 
+       data-description="Microsoft Word est un logiciel de traitement de texte qui permet de rédiger, mettre en page et formater des documents professionnels (rapports, lettres, CV, mémoires, e-books, etc.).
+👉 Avec une formation sur Word, vous apprendrez à utiliser les styles, insérer des images et tableaux, créer des sommaires automatiques et produire des documents clairs et bien structurés.">
+    <img src="{% static 'main/img/logos/word.jpeg' %}" alt="Word Logo">
+    <h2>Word</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation PowerPoint</h2>
-      <p>PowerPoint est un logiciel de création de présentations visuelles et dynamiques.
+  <!-- PowerPoint -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation PowerPoint" 
+       data-description="PowerPoint est un logiciel de création de présentations visuelles et dynamiques.
 👉 Avec une formation, vous saurez concevoir des diapositives attractives, intégrer des images, vidéos et animations, et présenter vos projets de manière claire et professionnelle.
-C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.</p>
-    </div>
+C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.">
+    <img src="{% static 'main/img/logos/powerpoint.jpeg' %}" alt="PowerPoint Logo">
+    <h2>PowerPoint</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation 3D Render</h2>
-      <p>Apprenez à transformer vos plans architecturaux en images 3D réalistes et immersives. Cette formation vous guide dans la modélisation et le rendu professionnel afin de créer des visuels attractifs pour l’architecture, le design d’intérieur ou la communication visuelle. Idéal pour étudiants, architectes et décorateurs souhaitant valoriser leurs projets.</p>
-    </div>
+  <!-- 3D Render -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation 3D Render" 
+       data-description="Apprenez à transformer vos plans architecturaux en images 3D réalistes et immersives. Cette formation vous guide dans la modélisation et le rendu professionnel afin de créer des visuels attractifs pour l’architecture, le design d’intérieur ou la communication visuelle. Idéal pour étudiants, architectes et décorateurs souhaitant valoriser leurs projets.">
+    <img src="{% static 'main/img/logos/3drender.png' %}" alt="3D Render Logo">
+    <h2>3D Render</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Sketchup</h2>
-      <p>Découvrez comment sublimer vos modèles SketchUp grâce au moteur de rendu V-Ray. Vous apprendrez à gérer la lumière, les textures, les matériaux et les effets réalistes (ombres, reflets, transparences). Cette formation est indispensable pour donner une touche photoréaliste à vos conceptions 3D.</p>
-    </div>
+  <!-- Sketchup -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Sketchup" 
+       data-description="Découvrez comment sublimer vos modèles SketchUp grâce au moteur de rendu V-Ray. Vous apprendrez à gérer la lumière, les textures, les matériaux et les effets réalistes (ombres, reflets, transparences). Cette formation est indispensable pour donner une touche photoréaliste à vos conceptions 3D.">
+    <img src="{% static 'main/img/logos/sketchup.jpeg' %}" alt="Sketchup Logo">
+    <h2>Sketchup</h2>
+  </div>
 
-    <div class="formation">
-      <h2>Formation Developpement Web (Java;Phyton;html;css...)</h2>
-      <p>Plongez dans le monde du développement web et logiciel avec une formation complète. Vous apprendrez à créer des sites internet modernes (HTML, CSS, JavaScript), à développer des applications backend (Python, Java) et à maîtriser les bases de la programmation. Une formation pratique pour devenir développeur polyvalent, capable de répondre aux besoins des entreprises et startups.</p>
-    </div>
-  </section>
+  <!-- Développement Web -->
+  <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
+       data-title="Formation Développement Web" 
+       data-description="Plongez dans le monde du développement web et logiciel avec une formation complète. Vous apprendrez à créer des sites internet modernes (HTML, CSS, JavaScript), à développer des applications backend (Python, Java) et à maîtriser les bases de la programmation. Une formation pratique pour devenir développeur polyvalent, capable de répondre aux besoins des entreprises et startups.">
+    <img src="{% static 'main/img/logos/webdev.jpeg' %}" alt="Développement Web Logo">
+    <h2>Développement Web</h2>
+  </div>
 
-</body>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formationModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="formationModalDescription"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var formationModal = document.getElementById('formationModal');
+formationModal.addEventListener('show.bs.modal', function (event) {
+  var trigger = event.relatedTarget;
+  var title = trigger.getAttribute('data-title');
+  var description = trigger.getAttribute('data-description');
+
+  document.getElementById('formationModalLabel').textContent = title;
+  document.getElementById('formationModalDescription').textContent = description;
+});
+</script>
+
 {% endblock %}

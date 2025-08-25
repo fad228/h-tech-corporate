@@ -1,35 +1,45 @@
+<!DOCTYPE html>
 {% extends "main/base.html" %}
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'main/style.css' %}">
 
 <style>
-
 .head-section {
   padding: 80px 20px;
-  background-color:rgb(186, 191, 209);
+  background: linear-gradient(135deg, #a5a5a5ff 0%, #757677ff 100%);
   text-align: center;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #a5a5a5ff 0%, #757677ff 100%);
+    color: #211a1a;
 }
 
 .team-section {
   padding: 80px 20px;
-  background-color:rgb(186, 191, 209);
+  background: linear-gradient(135deg, #a5a5a5ff 0%, #757677ff 100%);
   text-align: center;
 }
 .dark-mode .team-section {
-    background-color:rgb(65, 59, 59);
+    background: linear-gradient(135deg, #5c4f4fff 0%, #a36868ff 100%);
 }
+
 .team-section h1 {
   color: #007acc;
   font-size: 2.5rem;
   margin-bottom: 40px;
 }
+
 .team-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
 }
+
 .team-member {
   background: white;
   border-radius: 10px;
@@ -41,6 +51,7 @@
 .team-member:hover {
   transform: translateY(-5px);
 }
+
 .team-member img {
   width: 120px;
   height: 120px;
@@ -48,16 +59,19 @@
   object-fit: cover;
   margin-bottom: 15px;
 }
+
 .team-member h3 {
   margin-bottom: 5px;
   font-size: 1.2rem;
   color: #333;
 }
+
 .team-member p {
   color: #666;
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
+
 .team-member .social-icons a {
   margin: 0 5px;
   color: #007acc;
@@ -69,32 +83,29 @@
 }
 </style>
 
-<title>équipe | H-tech Corporate</title>
+<title>Équipe | H-tech Corporate</title>
 <meta name="description" content="Brève description de la page">
 <meta name="robots" content="index, follow">
 
-<body class="light-mode" style="background-image: url('{% static 'main/img/formation.jpg' %}');
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;">
+<body class="light-mode">
 
 <section class="head-section">
   <h1>Notre Équipe</h1>
   <div class="team-grid">
-    
     <div class="team-member">
       <img src="{% static 'main/img/Omar.jpeg' %}" alt="Omar">
       <h3>Omar Farouk KOUGBADA</h3>
-      <p> Ingénieur logiciel sénior, expert en intéligence artificielle et consultant en transformation digitale, Responsable des formations à H-tech Corporate</p>
+      <p>Ingénieur logiciel sénior, expert en intelligence artificielle et consultant en transformation digitale, Responsable des formations à H-tech Corporate</p>
       <div class="social-icons">
         <a href="#"><i class="bx bxl-linkedin"></i></a>
         <a href="#"><i class="bx bxl-github"></i></a>
       </div>
     </div>
+  </div>
 </section>
 
 <section class="team-section">
-    <div class="team-grid">
+  <div class="team-grid">
     <div class="team-member">
       <img src="{% static 'main/img/hassane.jpeg' %}" alt="Hassane">
       <h3>Hassane AMADOU</h3>
@@ -136,7 +147,7 @@ background-repeat: no-repeat;">
     <div class="team-member">
       <img src="{% static 'main/img/Fredy.jpeg' %}" alt="Fredy">
       <h3>Fredy Biova GBESSO</h3>
-      <p>Graphiste </p>
+      <p>Graphiste</p>
       <div class="social-icons">
         <a href="#"><i class="bx bxl-linkedin"></i></a>
         <a href="#"><i class="bx bxl-github"></i></a>
@@ -162,6 +173,24 @@ background-repeat: no-repeat;">
     </div>
 
     <div class="team-member">
+      <img src="{% static 'main/img/sika.jpg' %}" alt="sika">
+      <h3>Mme Sika NABILIOU-DOUTI</h3>
+      <p>Architècte DEIAU ONAT N° 173</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="{% static 'main/img/lazare.jpg' %}" alt="lazare">
+      <h3>SESSINOU Lazare</h3>
+      <p>Chef service étanchéité</p>
+      <div class="social-icons">
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+      </div>
+    </div>
+
+    <div class="team-member">
       <img src="{% static 'main/img/Rodrigue.jpg' %}" alt="Rodrigue">
       <h3>MFOULU Rodrigue</h3>
       <p>Architècte & Prof en 3DS Max</p>
@@ -169,6 +198,7 @@ background-repeat: no-repeat;">
         <a href="#"><i class="bx bxl-twitter"></i></a>
       </div>
     </div>
+
     <!-- Ajoute d'autres membres ici -->
 
   </div>
