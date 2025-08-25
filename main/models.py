@@ -118,7 +118,7 @@ class Media(models.Model):
         ('video', 'Vidéo'),
     ]
     titre = models.CharField(max_length=255)
-    fichier = CloudinaryField('media', resource_type='auto')  # 'auto' détecte image ou video
+    fichier = CloudinaryField('media', resource_type='auto', null=True, blank=True)  # 'auto' détecte image ou video
     type = models.CharField(max_length=5, choices=MEDIA_TYPES)
 
     def __str__(self):
