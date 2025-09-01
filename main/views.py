@@ -178,9 +178,11 @@ def supprimer_du_panier(request, produit_id):
 
 
 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Produit
 from django.contrib import messages
+from django.utils.http import urlencode
+
 
 def ajouter_au_panier(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
@@ -203,16 +205,28 @@ def ajouter_au_panier(request, produit_id):
     return redirect('boutique')
 
 
-
 def panier(request):
     panier = request.session.get('panier', {})
     total = 0
+    message_whatsapp = "Bonjour, je souhaite commander :\n"
+
     for item in panier.values():
-        total += item['prix'] * item['quantite']
-    return render(request, 'boutique/panier.html', {'panier': panier, 'total': total})
+        sous_total = item['prix'] * item['quantite']
+        total += sous_total
+        message_whatsapp += f"- {item['nom']} (x{item['quantite']})\n"
 
+    message_whatsapp += f"\nTotal : {total} FCFA"
 
-from django.shortcuts import redirect
+    # ⚠️ Mets ton vrai numéro WhatsApp ici (format international, ex: 22891234567)
+    whatsapp_number = "22892542889"
+    whatsapp_url = f"https://wa.me/{whatsapp_number}?text=" + urlencode({'': message_whatsapp})[1:]
+
+    return render(request, 'boutique/panier.html', {
+        'panier': panier,
+        'total': total,
+        'whatsapp_url': whatsapp_url
+    })
+
 
 def modifier_quantite(request, key):
     if request.method == "POST":
