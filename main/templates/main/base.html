@@ -60,6 +60,20 @@
             background-repeat: no-repeat;
         }
 
+        .boutique-highlight {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-weight: 600;
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(106, 17, 203, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boutique-highlight:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(37, 117, 252, 0.8);
+}
     </style>
 </head>
 
@@ -91,7 +105,7 @@
                             <li class="nav-item"><a class="nav-link text-black" href="{% url 'services' %}">Notre équipe</a></li>
                             <li class="nav-item"><a class="nav-link text-black" href="{% url 'galerie' %}">Galerie</a></li>
                             <li class="nav-item"><a class="nav-link text-black" href="{% url 'prestation' %}">Nos services</a></li>
-                            <li class="nav-item"><a class="nav-link text-black" href="{% url 'boutique' %}">Boutique</a></li>
+                            <li class="nav-item"><a class="nav-link text-white boutique-highlight" href="{% url 'boutique' %}">🛍️ Boutique</a></li>
                             <li class="nav-item"><a class="nav-link text-black" href="{% url 'contact' %}">Contact</a></li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-light btn-sm text-black" href="{% url 'inscription' %}">S'inscrire</a>

@@ -33,7 +33,8 @@
               </button>
               <form method="POST" action="{% url 'ajouter_au_panier' produit.id %}" class="d-inline">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-warning text-white btn-custom">
+                <button type="submit" class="btn btn-sm btn-warning text-white btn-custom" 
+                        onclick="addToCart('{{ produit.nom }}')">
                   <i class="bi bi-cart-fill"></i> Commander
                 </button>
               </form>
@@ -105,7 +106,6 @@ html, body {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     border-radius: 8px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    font-family: 'Montserrat', sans-serif;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 .ribbon:hover {
@@ -132,7 +132,7 @@ html, body {
     border-top-color: #2575fc;
 }
 
-/* --- Produits --- */
+/* --- Produits (cards) --- */
 .produit-img {
   height: 140px;
   object-fit: cover;
@@ -161,20 +161,42 @@ html, body {
   margin-bottom: 10px;
 }
 
-/* --- Collapse --- */
+/* --- Collapse (caractéristiques) --- */
 .details-collapse {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
 }
 .details-collapse.active { max-height: 300px; }
+/* Amélioration affichage détails produit sur mobile */
 .details-collapse .card-body {
-  background-color: rgba(255,255,255,0.85);
-  border-radius: 8px;
-  padding: 10px;
+  background-color: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-height: 250px;       /* limite la hauteur */
+  overflow-y: auto;        /* ajoute un scroll si c'est trop long */
+  word-wrap: break-word;   /* coupe les mots longs */
 }
 
-/* --- Panier --- */
+/* Ajustement pour mobile */
+@media (max-width: 576px) {
+  .produit-card {
+    padding: 8px;
+  }
+  .produit-nom {
+    font-size: 0.9rem;
+  }
+  .produit-prix {
+    font-size: 0.85rem;
+  }
+  .details-collapse .card-body {
+    font-size: 0.8rem;
+    max-height: 200px;   /* un peu plus petit sur mobile */
+  }
+}
+/* --- Panier flottant --- */
 .cart-icon {
   top: 20px;
   right: 20px;

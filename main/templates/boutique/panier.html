@@ -3,146 +3,241 @@
 {% block content %}
 
 <style>
-/* Ruban diagonale avec dégradé et glow */
-.ribbon {
-    position: relative;
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* dégradé violet → bleu */
-    color: white;
-    padding: 10px 40px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: inline-block;
-    margin-bottom: 30px;
-    transform: rotate(-5deg);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.ribbon:hover {
-    transform: rotate(-5deg) scale(1.05);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-}
+  /* 🌌 Background avec dégradé animé */
+  body {
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: #fff;
+  }
 
-/* Tableau moderne */
-.table-hover tbody tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.3s;
-}
+  @keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
 
-.table th, .table td {
-    vertical-align: middle !important;
-}
+  /* 📦 Carte centrale du panier */
+  .panier-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+  .panier-card:hover {
+    transform: translateY(-5px);
+  }
 
-.btn-custom {
-    transition: transform 0.2s, background-color 0.2s;
-}
-.btn-custom:hover {
-    transform: scale(1.05);
-}
+  /* 🧾 Tableau stylisé */
+  table {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  thead {
+    background: rgba(0,0,0,0.6);
+  }
+  tbody tr {
+    transition: background 0.3s ease;
+  }
+  tbody tr:hover {
+    background: rgba(255,255,255,0.1);
+  }
 
-/* Images produits */
-.product-img {
-    max-width: 60px;
+  /* 🎛️ Inputs */
+  .qty-input {
+    text-align: center;
     border-radius: 8px;
-    transition: transform 0.3s;
-}
-.product-img:hover {
-    transform: scale(1.1);
-}
+    border: none;
+    padding: 5px;
+    width: 70px;
+  }
 
-/* Responsive mobile */
-@media (max-width: 576px) {
-    .table thead {
-        display: none;
-    }
-    .table tr {
-        display: block;
-        margin-bottom: 1rem;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
-    .table td {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-    }
-    .table td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        flex: 1;
-    }
-}
+  /* 🟢 Boutons stylés */
+  .btn {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  .btn-danger:hover {
+    background: #ff4b5c;
+  }
+  .btn-success {
+    background: #25d366;
+    border: none;
+  }
+  .btn-success:hover {
+    background: #1ebe57;
+  }
 
-/* Effet bouton */
-.btn-success:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
-}
+  /* 💰 Total général stylé */
+  #grand-total {
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffdd00, #ff9900);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 </style>
 
-<div class="container my-5 text-center">
-    <span class="ribbon">🛒 Mon Panier</span>
-</div>
+<div class="container my-5">
+  <div class="panier-card">
+    <h2 class="text-center mb-4">🛒 Mon Panier</h2>
 
-<div class="container">
     {% if panier %}
-    <div class="table-responsive mt-4">
-        <table class="table table-hover text-center align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>Produit</th>
-                    <th>Image</th>
-                    <th>Prix Unitaire (FCFA)</th>
-                    <th>Quantité</th>
-                    <th>Total (FCFA)</th>
-                    <th>Supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for key, item in panier.items %}
-                <tr>
-                    <td data-label="Produit">{{ item.nom }}</td>
-                    <td data-label="Image">
-                        <img src="{{ item.image }}" alt="{{ item.nom }}" class="product-img">
-                    </td>
-                    <td data-label="Prix">{{ item.prix|floatformat:0 }}</td>
-                    <td data-label="Quantité">
-                        <form method="POST" action="{% url 'modifier_quantite' key %}" class="d-flex justify-content-center align-items-center">
-                            {% csrf_token %}
-                            <input type="number" name="quantite" value="{{ item.quantite }}" min="1" class="form-control form-control-sm me-2" style="width:70px;">
-                            <button type="submit" class="btn btn-sm btn-primary btn-custom">OK</button>
-                        </form>
-                    </td>
-                    <td data-label="Total">{{ item.total|floatformat:0 }}</td>
-                    <td data-label="Supprimer">
-                        <form method="POST" action="{% url 'supprimer_du_panier' key %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger btn-custom">❌</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle text-center text-light">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Image</th>
+            <th>Prix Unitaire (FCFA)</th>
+            <th>Quantité</th>
+            <th>Total (FCFA)</th>
+            <th>Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for key, item in panier.items %}
+          <tr data-key="{{ key }}">
+            <td class="item-nom">{{ item.nom }}</td>
+            <td><img src="{{ item.image }}" alt="{{ item.nom }}" width="60" class="rounded shadow"></td>
+            <td class="unit-price">{{ item.prix|floatformat:2 }}</td>
+            <td>
+              <input type="number" class="form-control form-control-sm qty-input" min="1"
+                     value="{{ item.quantite }}" data-key="{{ key }}">
+            </td>
+            <td class="item-total" data-key="{{ key }}">{{ item.total|floatformat:2 }}</td>
+            <td>
+              <form method="POST" action="{% url 'supprimer_du_panier' key %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">❌</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
-        <h4>Total Général : <strong>{{ total|floatformat:0 }} FCFA</strong></h4>
-        <div class="mt-3 mt-md-0">
-            <a href="{% url 'boutique' %}" class="btn btn-secondary btn-custom me-2">Continuer mes achats</a>
-            <a href="{{ whatsapp_url }}" target="_blank" class="btn btn-success">
-    Commander via WhatsApp
-</a>
-
-        </div>
+    <div class="d-flex justify-content-end align-items-center gap-3 mt-4">
+      <h4>Total Général : <span id="grand-total">{{ total|floatformat:2 }} FCFA</span></h4>
+      <a href="{% url 'boutique' %}" class="btn btn-secondary">🛍️ Continuer mes achats</a>
+      <a id="whatsapp-btn" href="{{ whatsapp_url }}" target="_blank" class="btn btn-success">💬 Commander via WhatsApp</a>
     </div>
+
     {% else %}
-    <div class="text-center mt-4">
-        <p class="fs-5">Votre panier est vide.</p>
-        <a href="{% url 'boutique' %}" class="btn btn-primary btn-custom">Retour à la boutique</a>
+    <p class="text-center">Votre panier est vide.</p>
+    <div class="text-center">
+      <a href="{% url 'boutique' %}" class="btn btn-primary">Retour à la boutique</a>
     </div>
     {% endif %}
+  </div>
 </div>
+
+<script>
+(function(){
+  // helper pour récupérer csrftoken
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  // debounce util
+  function debounce(fn, delay){
+    let t;
+    return function(...args){
+      clearTimeout(t);
+      t = setTimeout(()=> fn.apply(this, args), delay);
+    }
+  }
+
+  // envoie modification quantité via fetch POST
+  async function updateQuantity(key, quantite){
+    const url = "{% url 'modifier_quantite' 'REPLACE_KEY' %}".replace('REPLACE_KEY', key);
+    const form = new FormData();
+    form.append('quantite', quantite);
+
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrftoken
+      },
+      body: form
+    });
+
+    if (!resp.ok) {
+      console.error('Erreur lors de la mise à jour du panier');
+      return null;
+    }
+    return resp.json();
+  }
+
+  // mise à jour du lien WhatsApp dynamiquement
+  function updateWhatsappLink() {
+    let message = "Bonjour, je souhaite commander :\n";
+    let grandTotal = 0;
+
+    document.querySelectorAll('tbody tr').forEach(row => {
+      const nom = row.querySelector('.item-nom').innerText;
+      const qty = parseInt(row.querySelector('.qty-input').value);
+      const prix = parseFloat(row.querySelector('.unit-price').innerText);
+      const total = prix * qty;
+      grandTotal += total;
+
+      message += `- ${nom} (x${qty})\n`;
+    });
+
+    message += `\nTotal : ${grandTotal.toFixed(2)} FCFA`;
+    const whatsappNumber = "22898700015";
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    const btn = document.getElementById('whatsapp-btn');
+    if(btn) btn.href = whatsappUrl;
+  }
+
+  // Attachement événements sur tous les inputs quantity
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const debounced = debounce(async function(){
+      const key = this.dataset.key;
+      let q = parseInt(this.value) || 1;
+      if (q < 1) q = 1, this.value = 1;
+
+      const data = await updateQuantity(key, q);
+      if (data) {
+        const itemTotalCell = document.querySelector('.item-total[data-key="'+key+'"]');
+        if (itemTotalCell) itemTotalCell.innerText = parseFloat(data.item_total).toFixed(2);
+
+        const grand = document.getElementById('grand-total');
+        if (grand) grand.innerText = parseFloat(data.total).toFixed(2) + ' FCFA';
+
+        // 🔄 mettre à jour WhatsApp après chaque changement
+        updateWhatsappLink();
+      }
+    }, 450);
+
+    input.addEventListener('input', debounced);
+  });
+
+  // Initialisation au chargement
+  updateWhatsappLink();
+
+})();
+</script>
 
 {% endblock %}

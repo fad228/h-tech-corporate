@@ -178,11 +178,12 @@ def supprimer_du_panier(request, produit_id):
 
 
 
+# views.py (extraits)
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Produit
 from django.contrib import messages
-from django.utils.http import urlencode
-
+from django.http import JsonResponse
+from urllib.parse import quote
+from .models import Produit
 
 def ajouter_au_panier(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
@@ -198,6 +199,10 @@ def ajouter_au_panier(request, produit_id):
             'image': produit.image.url if produit.image else ""
         }
 
+    # Toujours (re)calculer le total de l'article
+    p = panier[str(produit_id)]
+    p['total'] = round(p['prix'] * p['quantite'], 2)
+
     request.session['panier'] = panier
     request.session.modified = True
 
@@ -207,33 +212,65 @@ def ajouter_au_panier(request, produit_id):
 
 def panier(request):
     panier = request.session.get('panier', {})
-    total = 0
+    total = 0.0
+
+    # calcule le total par article (sécurisé) et le total général
+    for key, item in panier.items():
+        # assure que prix et quantite existent
+        prix = float(item.get('prix', 0))
+        quantite = int(item.get('quantite', 0))
+        item_total = round(prix * quantite, 2)
+        item['total'] = item_total
+        total += item_total
+
+    # construire url WhatsApp (si besoin) — exemple :
     message_whatsapp = "Bonjour, je souhaite commander :\n"
-
     for item in panier.values():
-        sous_total = item['prix'] * item['quantite']
-        total += sous_total
         message_whatsapp += f"- {item['nom']} (x{item['quantite']})\n"
+    message_whatsapp += f"\nTotal : {round(total,2)} FCFA"
+    whatsapp_number = "22898700015"
+    whatsapp_url = f"https://wa.me/{whatsapp_number}?text={quote(message_whatsapp)}"
 
-    message_whatsapp += f"\nTotal : {total} FCFA"
-
-    # ⚠️ Mets ton vrai numéro WhatsApp ici (format international, ex: 22891234567)
-    whatsapp_number = "22892542889"
-    whatsapp_url = f"https://wa.me/{whatsapp_number}?text=" + urlencode({'': message_whatsapp})[1:]
-
+    request.session['panier'] = panier
     return render(request, 'boutique/panier.html', {
         'panier': panier,
-        'total': total,
+        'total': round(total, 2),
         'whatsapp_url': whatsapp_url
     })
 
 
 def modifier_quantite(request, key):
-    if request.method == "POST":
-        quantite = int(request.POST.get('quantite', 1))
-        panier = request.session.get('panier', {})
-        if key in panier:
-            panier[key]['quantite'] = quantite
-            panier[key]['total'] = panier[key]['prix'] * quantite
-            request.session['panier'] = panier
+    """
+    Supporte deux usages :
+    - Requête normale POST (redirige ensuite)
+    - Requête AJAX/Fetch -> renvoie JSON avec item_total et total_general
+    """
+    if request.method != "POST":
+        return redirect('panier')
+
+    quantite = int(request.POST.get('quantite', 1))
+    panier = request.session.get('panier', {})
+    response_data = {}
+
+    if key in panier:
+        prix = float(panier[key].get('prix', 0))
+        panier[key]['quantite'] = quantite
+        panier[key]['total'] = round(prix * quantite, 2)
+
+        # recalcul total général
+        total_general = 0.0
+        for it in panier.values():
+            total_general += float(it.get('prix', 0)) * int(it.get('quantite', 0))
+
+        request.session['panier'] = panier
+        request.session.modified = True
+
+        # Si requête AJAX (fetch), renvoyer JSON
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            response_data['item_total'] = panier[key]['total']
+            response_data['total'] = round(total_general, 2)
+            return JsonResponse(response_data)
+
+    # sinon redirection normale
     return redirect('panier')
+
