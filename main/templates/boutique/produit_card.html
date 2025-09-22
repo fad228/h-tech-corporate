@@ -1,0 +1,50 @@
+<div class="col-6 col-sm-3">
+    <div class="card h-100 text-center shadow produit-card border-0 rounded-3 position-relative">
+      <img src="{{ produit.image.url }}" class="card-img-top img-fluid produit-img"
+           alt="{{ produit.nom }}" data-bs-toggle="modal" data-bs-target="#lightboxModal{{ produit.id }}">
+      <div class="card-body">
+        <h5 class="card-title produit-nom">{{ produit.nom }}</h5>
+        <p class="card-text fw-bold text-success produit-prix">{{ produit.prix }} FCFA</p>
+  
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-sm btn-dark toggle-details" type="button" data-id="{{ produit.id }}">
+            Voir Détails
+          </button>
+          <form method="POST" action="{% url 'ajouter_au_panier' produit.id %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-warning text-white btn-custom" 
+                    onclick="addToCart('{{ produit.nom }}')">
+              <i class="bi bi-cart-fill"></i> Commander
+            </button>
+          </form>
+        </div>
+  
+        <div class="details-collapse mt-2" id="details{{ produit.id }}">
+          {% if produit.caracteristiques %}
+            <div class="card card-body text-start">
+              <h6 class="fw-bold">Caractéristiques :</h6>
+              <p>{{ produit.caracteristiques }}</p>
+            </div>
+          {% else %}
+            <div class="card card-body text-start">
+              <p>Aucune caractéristique disponible.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal Lightbox -->
+    <div class="modal fade" id="lightboxModal{{ produit.id }}" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0">
+          <div class="modal-body p-0">
+            <img src="{{ produit.image.url }}" class="img-fluid rounded-3" alt="{{ produit.nom }}">
+          </div>
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

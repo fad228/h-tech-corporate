@@ -15,6 +15,32 @@ section.formations {
   margin: auto;
 }
 
+.click-indicator {
+  font-size: 0.85em;
+  color: #444;
+  margin-top: 6px;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  opacity: 0.85;
+}
+
+.click-indicator i {
+  font-size: 1em;
+  color: #0d6efd; /* bleu moderne */
+}
+
+.dark-mode .click-indicator {
+  color: #ccc;
+}
+
+.dark-mode .click-indicator i {
+  color: #3f8cff; /* bleu clair adapté au sombre */
+}
+
+
 /* ---- Carte formation ---- */
 .formation {
   background: rgba(255, 255, 255, 0.9);
@@ -75,6 +101,9 @@ section.formations {
        data-description="Logiciel BIM (Building Information Modeling) puissant, utilisé pour la conception architecturale 2D et 3D. ArchiCAD permet de modéliser des bâtiments avec précision, de produire des plans techniques et de générer automatiquement des rendus. Idéal pour les architectes et les bureaux d’études.">
     <img src="{% static 'main/img/logos/archicad.jpeg' %}" alt="ArchiCAD Logo">
     <h2>ArchiCAD</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- AutoCAD -->
@@ -83,6 +112,9 @@ section.formations {
        data-description="Logiciel de référence en dessin technique assisté par ordinateur (DAO). AutoCAD est utilisé pour créer des plans 2D détaillés et des modèles 3D dans les domaines de l’architecture, du génie civil, de l’électricité et de la mécanique.">
     <img src="{% static 'main/img/logos/autocad.jpeg' %}" alt="AutoCAD Logo">
     <h2>AutoCAD</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Robot Structural Analysis -->
@@ -91,6 +123,9 @@ section.formations {
        data-description="Outil avancé d’analyse et de calcul de structures. Il permet d’étudier la résistance, la stabilité et le comportement des bâtiments ou ouvrages d’ingénierie. Indispensable pour les ingénieurs civils et les bureaux de calcul.">
     <img src="{% static 'main/img/logos/robot.jpeg' %}" alt="Robot Logo">
     <h2>Robot Structural Analysis</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Lumion -->
@@ -99,6 +134,9 @@ section.formations {
        data-description="Logiciel de rendu 3D en temps réel. Lumion transforme rapidement des modèles 3D en images et animations photoréalistes avec des effets de lumière, végétation, eau et matériaux réalistes. Très prisé en architecture pour des présentations percutantes.">
     <img src="{% static 'main/img/logos/lumion.jpeg' %}" alt="Lumion Logo">
     <h2>Lumion</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- 3DS Max -->
@@ -107,6 +145,9 @@ section.formations {
        data-description="Logiciel de modélisation, d’animation et de rendu 3D. Utilisé dans l’architecture, le design, mais aussi dans le cinéma et le jeu vidéo. 3DS Max permet de créer des modèles réalistes et des animations complexes.">
     <img src="{% static 'main/img/logos/3dsmax.jpeg' %}" alt="3DS Max Logo">
     <h2>3DS Max</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Covadis -->
@@ -115,6 +156,9 @@ section.formations {
        data-description="Extension d’AutoCAD spécialisée dans le génie civil et le topographique. Covadis est utilisé pour les projets routiers, les travaux publics, le nivellement, le calcul de cubatures et la modélisation des terrains.">
     <img src="{% static 'main/img/logos/covadis.jpeg' %}" alt="Covadis Logo">
     <h2>Covadis</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
@@ -122,6 +166,9 @@ section.formations {
        data-description="CYPECAD est une application BIM pour la conception, le calcul et le dimensionnement de structures pour le bâtiment et les ouvrages d'art, soumises à des actions verticales, horizontales et à l'action du feu.">
     <img src="{% static 'main/img/logos/cypecad.jpeg' %}" alt="CypeCad Logo">
     <h2>CYPECAD</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
@@ -129,6 +176,9 @@ section.formations {
        data-description="Twinmotion permet d'insérer un projet dans son environnement dynamique, de le visionner en temps réel, de créer des présentations réalistes et animées à partir de données 3D, pour une prise de décision sur site.">
     <img src="{% static 'main/img/logos/Twinmotion.jpeg' %}" alt="Twinmotion Logo">
     <h2>TWINMOTION</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
@@ -136,6 +186,9 @@ section.formations {
        data-description="Artlantis est un logiciel 3D développé par Abvent. Il est utilisé pour le rendu photoréaliste d'images et d'animations d'architecture.">
     <img src="{% static 'main/img/logos/Artlantis.jpeg' %}" alt="Artlantis Logo">
     <h2>ARTLANTIS</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
@@ -143,6 +196,9 @@ section.formations {
        data-description="QGIS peut être utilisé comme logiciel autonome ou comme interface graphique du logiciel SIG GRASS. Il est ainsi possible d'utiliser toute sa puissance d'analyse dans un environnement de travail plus convivial. Il est également possible d'appeler les modules SAGA GIS depuis QGIS.">
     <img src="{% static 'main/img/logos/QGIS.jpeg' %}" alt="QGIS Logo">
     <h2>QGIS</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <div class="formation" data-bs-toggle="modal" data-bs-target="#formationModal" 
@@ -150,6 +206,9 @@ section.formations {
        data-description="Photoshop est un logiciel de la suite Adobe. Ce logiciel de traitement d'image professionnel permet de faire de la retouche photo, du graphisme ou encore du webdesign.">
     <img src="{% static 'main/img/logos/Photoshop.jpeg' %}" alt="Photoshop Logo">
     <h2>PHOTOSHOP</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Excel -->
@@ -160,6 +219,9 @@ section.formations {
 C’est un outil incontournable en gestion, finance, comptabilité et analyse de données.">
     <img src="{% static 'main/img/logos/excel.jpeg' %}" alt="Excel Logo">
     <h2>Excel</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Word -->
@@ -169,6 +231,9 @@ C’est un outil incontournable en gestion, finance, comptabilité et analyse de
 👉 Avec une formation sur Word, vous apprendrez à utiliser les styles, insérer des images et tableaux, créer des sommaires automatiques et produire des documents clairs et bien structurés.">
     <img src="{% static 'main/img/logos/word.jpeg' %}" alt="Word Logo">
     <h2>Word</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- PowerPoint -->
@@ -179,6 +244,9 @@ C’est un outil incontournable en gestion, finance, comptabilité et analyse de
 C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.">
     <img src="{% static 'main/img/logos/powerpoint.jpeg' %}" alt="PowerPoint Logo">
     <h2>PowerPoint</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- 3D Render -->
@@ -187,6 +255,9 @@ C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.
        data-description="Apprenez à transformer vos plans architecturaux en images 3D réalistes et immersives. Cette formation vous guide dans la modélisation et le rendu professionnel afin de créer des visuels attractifs pour l’architecture, le design d’intérieur ou la communication visuelle. Idéal pour étudiants, architectes et décorateurs souhaitant valoriser leurs projets.">
     <img src="{% static 'main/img/logos/3drender.png' %}" alt="3D Render Logo">
     <h2>3D Render</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Sketchup -->
@@ -195,6 +266,9 @@ C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.
        data-description="Découvrez comment sublimer vos modèles SketchUp grâce au moteur de rendu V-Ray. Vous apprendrez à gérer la lumière, les textures, les matériaux et les effets réalistes (ombres, reflets, transparences). Cette formation est indispensable pour donner une touche photoréaliste à vos conceptions 3D.">
     <img src="{% static 'main/img/logos/sketchup.jpeg' %}" alt="Sketchup Logo">
     <h2>Sketchup</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
   <!-- Développement Web -->
@@ -203,6 +277,9 @@ C’est l’outil idéal pour réussir vos soutenances, réunions ou formations.
        data-description="Plongez dans le monde du développement web et logiciel avec une formation complète. Vous apprendrez à créer des sites internet modernes (HTML, CSS, JavaScript), à développer des applications backend (Python, Java) et à maîtriser les bases de la programmation. Une formation pratique pour devenir développeur polyvalent, capable de répondre aux besoins des entreprises et startups.">
     <img src="{% static 'main/img/logos/webdev.jpeg' %}" alt="Développement Web Logo">
     <h2>Développement Web</h2>
+    <p class="click-indicator">
+  <i class="bi bi-hand-index-thumb"></i> Cliquez sur le logo
+</p>
   </div>
 
 </section>

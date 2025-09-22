@@ -126,16 +126,21 @@ class Media(models.Model):
 
 
 
-
 class Produit(models.Model):
+    CATEGORIES = [
+        ('informatique', 'Informatique'),
+        ('sport', 'Équipements sportifs'),
+        ('autres', 'Autres'),
+    ]
+
     nom = models.CharField(max_length=200)
     description = models.TextField()
     prix = models.DecimalField(max_digits=10, decimal_places=2)
     image = CloudinaryField('image', blank=True, null=True)  # Image stockée sur Cloudinary
     caracteristiques = models.TextField(blank=True, null=True)
+    categorie = models.CharField(max_length=20, choices=CATEGORIES, default='autres')
 
     def __str__(self):
         return self.nom
-
 
 

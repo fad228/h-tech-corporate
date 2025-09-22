@@ -1,106 +1,98 @@
 {% extends "main/base.html" %}
 {% load static %}
+
 {% block content %}
 
+
 <div class="container my-5 text-center">
-    <!-- Ruban Boutique -->
-    <span class="ribbon">🛍️ Notre Boutique</span>
+    <span class="ribbon">
+        <i class="bi bi-shop"></i> Notre Boutique
+    </span>
 </div>
+
 
 <!-- Icône panier flottante -->
 <div class="cart-icon position-fixed" onclick="goToCart()">
     🛒 <span id="cart-count" class="cart-count">{{ request.session.panier|length|default:"0" }}</span>
 </div>
 
-<div class="container mt-5">
-  <div class="row g-4">
-    {% for produit in produits %}
-      <div class="col-6 col-sm-3">
-        <div class="card h-100 text-center shadow produit-card border-0 rounded-3 position-relative">
+<!-- 🚚 Bulle message livraison -->
+<div class="delivery-bubble">
+    <i class="bi bi-truck"></i> Livraison gratuite partout à Lomé
+</div>
 
-          <!-- Image avec lightbox -->
-          <img src="{{ produit.image.url }}" class="card-img-top img-fluid produit-img"
-               alt="{{ produit.nom }}" data-bs-toggle="modal" data-bs-target="#lightboxModal{{ produit.id }}">
 
-          <div class="card-body">
-            <h5 class="card-title produit-nom">{{ produit.nom }}</h5>
-            <p class="card-text fw-bold text-success produit-prix">{{ produit.prix }} FCFA</p>
+<div class="category-tabs container mb-5">
+    <button class="tab-btn active" onclick="showCategory('all', this)">
+        <i class="bi bi-grid"></i> Voir tout
+    </button>
+    <button class="tab-btn" onclick="showCategory('informatique', this)">
+        <i class="bi bi-laptop"></i> Informatique
+    </button>
+    <button class="tab-btn" onclick="showCategory('sportifs', this)">
+    <i class="fas fa-basketball-ball"></i> Équipements Sportifs
+</button>
 
-            <!-- Boutons -->
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-sm btn-dark toggle-details" type="button" data-id="{{ produit.id }}">
-                Voir Détails
-              </button>
-              <form method="POST" action="{% url 'ajouter_au_panier' produit.id %}" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-warning text-white btn-custom" 
-                        onclick="addToCart('{{ produit.nom }}')">
-                  <i class="bi bi-cart-fill"></i> Commander
-                </button>
-              </form>
-            </div>
+    <button class="tab-btn" onclick="showCategory('autres', this)">
+        <i class="bi bi-box-seam"></i> Autres
+    </button>
+</div>
 
-            <!-- Caractéristiques déroulantes -->
-            <div class="details-collapse mt-2" id="details{{ produit.id }}">
-              {% if produit.caracteristiques %}
-                <div class="card card-body text-start">
-                  <h6 class="fw-bold">Caractéristiques :</h6>
-                  <p>{{ produit.caracteristiques }}</p>
-                </div>
-              {% else %}
-                <div class="card card-body text-start">
-                  <p>Aucune caractéristique disponible.</p>
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- --- Sections produits --- -->
+<div class="container">
 
-      <!-- Modal Lightbox -->
-      <div class="modal fade" id="lightboxModal{{ produit.id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content bg-transparent border-0">
-            <div class="modal-body p-0">
-              <img src="{{ produit.image.url }}" class="img-fluid rounded-3" alt="{{ produit.nom }}">
-            </div>
-            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-        </div>
-      </div>
-
-    {% endfor %}
+  <!-- Informatique -->
+  <div id="section-informatique" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_informatique %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
   </div>
+
+  <!-- Sportifs -->
+  <div id="section-sportifs" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_sportifs %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Autres -->
+  <div id="section-autres" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_autres %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
 </div>
 
 <!-- Notification -->
 <div id="notification" class="notification"></div>
 
 <style>
-/* --- Background dégradé pour toute la page --- */
-html, body {
-    height: 100%;
-    margin: 0;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f, #6a11cb, #2575fc);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+/* --- Font & Background --- */
+body, html {
     font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    min-height: 100%;
+    margin: 0;
 }
 
-/* Animation dégradé */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* --- Ruban Boutique --- */
+/* --- Ribbon --- */
 .ribbon {
-    position: relative;
     display: inline-block;
     padding: 12px 30px;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: white;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -108,179 +100,181 @@ html, body {
     box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.ribbon:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+.ribbon:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.35); }
+
+/* --- Onglets catégories --- */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
 }
-.ribbon::before,
-.ribbon::after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-style: solid;
-    border-color: transparent;
-    bottom: -10px;
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
 }
-.ribbon::before {
-    left: -10px;
-    border-width: 10px 10px 0 0;
-    border-top-color: #6a11cb;
-}
-.ribbon::after {
-    right: -10px;
-    border-width: 10px 0 0 10px;
-    border-top-color: #2575fc;
+.tab-btn.active, .tab-btn:hover {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-/* --- Produits (cards) --- */
-.produit-img {
-  height: 140px;
-  object-fit: cover;
-  border-radius: 12px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
-}
+/* --- Produits cartes --- */
 .produit-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
 }
-.produit-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+.produit-card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
-.produit-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
-.produit-nom {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 8px 0 4px;
-}
-.produit-prix {
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-}
+.produit-img { width: 100%; height: 160px; object-fit: cover; transition: transform 0.3s; cursor: pointer; }
+.produit-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+.produit-img:hover { transform: scale(1.05); }
 
-/* --- Collapse (caractéristiques) --- */
+/* --- Détails produits (Voir/Masquer) --- */
 .details-collapse {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    margin-top: 5px;
 }
-.details-collapse.active { max-height: 300px; }
-/* Amélioration affichage détails produit sur mobile */
+.details-collapse.active {
+    max-height: 300px;   /* PC */
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(248, 249, 250, 0.95);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+}
 .details-collapse .card-body {
-  background-color: rgba(255,255,255,0.95);
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  max-height: 250px;       /* limite la hauteur */
-  overflow-y: auto;        /* ajoute un scroll si c'est trop long */
-  word-wrap: break-word;   /* coupe les mots longs */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #333;
+    white-space: pre-line;
+}
+@media (max-width: 768px) {
+    .details-collapse.active { max-height: 350px; }
 }
 
-/* Ajustement pour mobile */
-@media (max-width: 576px) {
-  .produit-card {
-    padding: 8px;
-  }
-  .produit-nom {
-    font-size: 0.9rem;
-  }
-  .produit-prix {
-    font-size: 0.85rem;
-  }
-  .details-collapse .card-body {
-    font-size: 0.8rem;
-    max-height: 200px;   /* un peu plus petit sur mobile */
-  }
-}
 /* --- Panier flottant --- */
 .cart-icon {
-  top: 20px;
-  right: 20px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  padding: 12px 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 20px;
-  z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
+    top: 20px; right: 20px; position: fixed;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white; padding: 12px 16px; border-radius: 50%;
+    font-size: 20px; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.cart-icon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+.cart-icon:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+.cart-count { position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 12px; padding: 3px 7px; border-radius: 50%; font-weight: bold; }
+
+
+/* --- 🚚 Bulle livraison --- */
+.delivery-bubble {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #ff5722, #ff9800);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1000;
+    animation: pulse 2s infinite;
+    font-size: 14px;
 }
-.cart-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  padding: 3px 7px;
-  border-radius: 50%;
-  font-weight: bold;
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 /* --- Notification --- */
 .notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none;
-  z-index: 1100;
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+    position: fixed; bottom: 20px; right: 20px;
+    background: #4CAF50; color: white;
+    padding: 12px 20px; border-radius: 5px;
+    opacity: 0; display: none; z-index: 1100;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.notification.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(-10px);
-}
+.notification.show { display: block; opacity: 1; transform: translateY(-10px); }
 
-/* Responsive */
-@media (max-width: 576px) { .produit-img { height: 120px; } }
+/* --- Sections catégories --- */
+.category-section { display: none; }
+.category-section.active { display: block; }
 </style>
 
 <script>
 let cartCount = {{ request.session.panier|length|default:"0" }};
 
-// Ajout produit au panier (front + notif)
-function addToCart(productName) {
-  cartCount++;
-  document.getElementById("cart-count").innerText = cartCount;
-
-  let notif = document.getElementById("notification");
-  notif.innerText = productName + " ajouté au panier !";
-  notif.classList.add("show");
-
-  setTimeout(() => { notif.classList.remove("show"); }, 2000);
+// Afficher notification panier
+function addToCart(productName){
+    cartCount++;
+    document.getElementById("cart-count").innerText = cartCount;
+    let notif = document.getElementById("notification");
+    notif.innerText = productName + " ajouté au panier !";
+    notif.classList.add("show");
+    setTimeout(() => { notif.classList.remove("show"); }, 2000);
 }
 
-// Redirection vers la page panier Django
-function goToCart() {
-  window.location.href = "{% url 'panier' %}";
+// Aller au panier
+function goToCart(){ window.location.href = "{% url 'panier' %}"; }
+
+// Filtrer catégories et highlight onglet actif
+function showCategory(cat, btn){
+    const sections = document.querySelectorAll(".category-section");
+    sections.forEach(section => section.classList.remove("active"));
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    tabBtns.forEach(b => b.classList.remove("active"));
+
+    if(btn) btn.classList.add("active");
+
+    if(cat === "all") sections.forEach(s => s.classList.add("active"));
+    else document.getElementById("section-" + cat).classList.add("active");
+
+    // Anim cartes
+    setTimeout(() => {
+        document.querySelectorAll(".category-section.active .produit-card").forEach(card=>{
+            card.classList.add("show");
+        });
+    }, 100);
 }
 
-// Détails déroulants
-document.querySelectorAll('.toggle-details').forEach(button => {
-  button.addEventListener('click', () => {
-    const id = button.dataset.id;
-    const details = document.getElementById('details' + id);
-    details.classList.toggle('active');
-    if(details.classList.contains('active')) {
-      details.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+// Toggle détails produit
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.toggle-details').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      const details = document.getElementById('details' + id);
+      details.classList.toggle('active');
+
+      // Changer le texte du bouton
+      if (details.classList.contains('active')) {
+        btn.textContent = "Masquer";
+      } else {
+        btn.textContent = "Voir Détails";
+      }
+    });
   });
 });
+
+// Afficher tout par défaut
+showCategory("all", document.querySelector(".tab-btn.active"));
 </script>
 
 {% endblock %}

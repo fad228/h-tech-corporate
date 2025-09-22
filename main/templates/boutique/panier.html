@@ -75,7 +75,7 @@
 
   /* 💰 Total général stylé */
   #grand-total {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: bold;
     background: linear-gradient(90deg, #ffdd00, #ff9900);
     -webkit-background-clip: text;
@@ -123,11 +123,15 @@
       </table>
     </div>
 
-    <div class="d-flex justify-content-end align-items-center gap-3 mt-4">
-      <h4>Total Général : <span id="grand-total">{{ total|floatformat:2 }} FCFA</span></h4>
-      <a href="{% url 'boutique' %}" class="btn btn-secondary">🛍️ Continuer mes achats</a>
-      <a id="whatsapp-btn" href="{{ whatsapp_url }}" target="_blank" class="btn btn-success">💬 Commander via WhatsApp</a>
-    </div>
+
+<div class="d-flex flex-column flex-md-row justify-content-md-end align-items-center gap-3 mt-4 text-center text-md-end">
+  <h4 class="mb-2 mb-md-0">Total Général : <span id="grand-total">{{ total|floatformat:2 }} FCFA</span></h4>
+  
+  <div class="d-flex flex-column flex-sm-row gap-2">
+    <a href="{% url 'boutique' %}" class="btn btn-secondary">🛍️ Continuer mes achats</a>
+    <a id="whatsapp-btn" href="{{ whatsapp_url }}" target="_blank" class="btn btn-success">💬 Commander via WhatsApp</a>
+  </div>
+</div>
 
     {% else %}
     <p class="text-center">Votre panier est vide.</p>
@@ -189,7 +193,7 @@
   }
 
   // mise à jour du lien WhatsApp dynamiquement
-  function updateWhatsappLink() {
+  /*function updateWhatsappLink() {
     let message = "Bonjour, je souhaite commander :\n";
     let grandTotal = 0;
 
@@ -209,7 +213,7 @@
 
     const btn = document.getElementById('whatsapp-btn');
     if(btn) btn.href = whatsappUrl;
-  }
+  } */
 
   // Attachement événements sur tous les inputs quantity
   document.querySelectorAll('.qty-input').forEach(input => {

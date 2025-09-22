@@ -154,9 +154,22 @@ def galerie(request):
 from django.shortcuts import render, get_object_or_404
 from .models import Produit
 
+
 def boutique(request):
-    produits = Produit.objects.all()
-    return render(request, "boutique/boutique.html", {"produits": produits})
+    # On récupère les produits par catégorie
+    produits_informatique = Produit.objects.filter(categorie="informatique")
+    produits_sportifs = Produit.objects.filter(categorie="equipement_sportif")
+    produits_autres = Produit.objects.filter(categorie="autres")
+
+    # On envoie les données au template
+    context = {
+        'produits_informatique': produits_informatique,
+        'produits_sportifs': produits_sportifs,
+        'produits_autres': produits_autres,
+    }
+    return render(request, 'boutique/boutique.html', context)
+
+
 
 def produit_detail(request, produit_id):
     produit = get_object_or_404(Produit, id=produit_id)
@@ -223,10 +236,14 @@ def panier(request):
         item['total'] = item_total
         total += item_total
 
-    # construire url WhatsApp (si besoin) — exemple :
+
+    # Construire le message WhatsApp avec image
     message_whatsapp = "Bonjour, je souhaite commander :\n"
     for item in panier.values():
-        message_whatsapp += f"- {item['nom']} (x{item['quantite']})\n"
+        message_whatsapp += (
+            f"- {item['nom']} (x{item['quantite']})\n"
+            f"📸 Image : {quote(item['image'])}\n\n"
+        )
     message_whatsapp += f"\nTotal : {round(total,2)} FCFA"
     whatsapp_number = "22898700015"
     whatsapp_url = f"https://wa.me/{whatsapp_number}?text={quote(message_whatsapp)}"
