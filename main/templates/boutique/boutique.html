@@ -29,7 +29,7 @@
     <button class="tab-btn" onclick="showCategory('informatique', this)">
         <i class="bi bi-laptop"></i> Informatique
     </button>
-    <button class="tab-btn" onclick="showCategory('equipement_sportif', this)">
+    <button class="tab-btn" onclick="showCategory('sport', this)">
     <i class="fas fa-basketball-ball"></i> Équipements Sportifs
 </button>
 
@@ -53,7 +53,7 @@
   </div>
 
   <!-- Sportifs -->
-  <div id="section-sportifs" class="category-section">
+  <div id="section-sport" class="category-section">
     <div class="row g-4">
       {% for produit in produits_sportifs %}
         {% include 'boutique/produit_card.html' with produit=produit %}
@@ -103,6 +103,16 @@ body, html {
 .ribbon:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.35); }
 
 /* --- Onglets catégories --- */
+
+.category-section {
+    display: none;
+    margin-bottom: 60px;  /* espace entre les catégories */
+}
+.category-section.active {
+    display: block;
+}
+
+
 .category-tabs {
     display: flex;
     justify-content: center;

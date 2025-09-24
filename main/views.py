@@ -158,7 +158,7 @@ from .models import Produit
 def boutique(request):
     # On récupère les produits par catégorie
     produits_informatique = Produit.objects.filter(categorie="informatique")
-    produits_sportifs = Produit.objects.filter(categorie="equipement_sportif")
+    produits_sportifs = Produit.objects.filter(categorie="sport")
     produits_autres = Produit.objects.filter(categorie="autres")
 
     # On envoie les données au template
