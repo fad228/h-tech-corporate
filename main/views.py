@@ -159,12 +159,25 @@ def boutique(request):
     # On récupère les produits par catégorie
     produits_informatique = Produit.objects.filter(categorie="informatique")
     produits_sportifs = Produit.objects.filter(categorie="sport")
+    produits_immobilier = Produit.objects.filter(categorie="immobilier")
+    produits_fastfood = Produit.objects.filter(categorie="fastfood")
+    produits_construction = Produit.objects.filter(categorie="construction")
+    produits_lunetterie = Produit.objects.filter(categorie="lunetterie")
+    produits_vêtements = Produit.objects.filter(categorie="vêtements")
+    produits_cosmétique = Produit.objects.filter(categorie="cosmétique")
     produits_autres = Produit.objects.filter(categorie="autres")
+    
 
     # On envoie les données au template
     context = {
         'produits_informatique': produits_informatique,
         'produits_sportifs': produits_sportifs,
+        'produits_immobilier': produits_immobilier,
+        'produits_fastfood': produits_fastfood,
+        'produits_construction': produits_construction,
+        'produits_lunetterie': produits_lunetterie,
+        'produits_vêtements': produits_vêtements,
+        'produits_cosmétique': produits_cosmétique,
         'produits_autres': produits_autres,
     }
     return render(request, 'boutique/boutique.html', context)

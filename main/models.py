@@ -130,6 +130,12 @@ class Produit(models.Model):
     CATEGORIES = [
         ('informatique', 'Informatique'),
         ('sport', 'Équipements sportifs'),
+        ('immobilier', 'Immobilier'),
+        ('fastfood', 'Fastfood'),
+        ('construction', 'Construction'),
+        ('lunetterie', 'Lunetterie'),
+        ('vêtements', 'Vêtements'),
+        ('cosmétique', 'Cosmetique'),
         ('autres', 'Autres'),
     ]
 

@@ -23,19 +23,37 @@
 
 
 <div class="category-tabs container mb-5">
-    <button class="tab-btn active" onclick="showCategory('all', this)">
-        <i class="bi bi-grid"></i> Voir tout
-    </button>
-    <button class="tab-btn" onclick="showCategory('informatique', this)">
-        <i class="bi bi-laptop"></i> Informatique
-    </button>
-    <button class="tab-btn" onclick="showCategory('sport', this)">
+  <button class="tab-btn active" onclick="showCategory('all', this)">
+    <i class="bi bi-grid"></i> Voir tout
+</button>
+<button class="tab-btn" onclick="showCategory('informatique', this)">
+    <i class="bi bi-laptop"></i> Bureau
+</button>
+<button class="tab-btn" onclick="showCategory('sport', this)">
     <i class="fas fa-basketball-ball"></i> Équipements Sportifs
 </button>
+<button class="tab-btn" onclick="showCategory('immobilier', this)">
+    <i class="fas fa-building"></i> Immobilier
+</button>
+<button class="tab-btn" onclick="showCategory('fastfood', this)">
+    <i class="fas fa-hamburger"></i> Fast food
+</button>
+<button class="tab-btn" onclick="showCategory('construction', this)">
+    <i class="fas fa-tools"></i> Construction
+</button>
+<button class="tab-btn" onclick="showCategory('lunetterie', this)">
+    <i class="bi bi-eyeglasses"></i> Lunetterie
+</button>
+<button class="tab-btn" onclick="showCategory('vetements', this)">
+    <i class="fas fa-tshirt"></i> Vêtements
+</button>
+<button class="tab-btn" onclick="showCategory('cosmetique', this)">
+    <i class="fas fa-droplet"></i> Cosmétique
+</button>
+<button class="tab-btn" onclick="showCategory('autres', this)">
+    <i class="bi bi-box-seam"></i> Autres
+</button>
 
-    <button class="tab-btn" onclick="showCategory('autres', this)">
-        <i class="bi bi-box-seam"></i> Autres
-    </button>
 </div>
 
 <!-- --- Sections produits --- -->
@@ -62,6 +80,79 @@
       {% endfor %}
     </div>
   </div>
+
+
+  <!-- Immobilier -->
+  <div id="section-immobilier" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_immobilier %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <!-- Fast food -->
+  <div id="section-fastfood" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_fastfood %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <!-- construction -->
+  <div id="section-construction" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_construction %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  
+  <!-- lunetterie -->
+  <div id="section-lunetterie" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_lunetterie %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <!-- vêtements -->
+  <div id="section-vêtements" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_vêtements %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <!-- cosmétique -->
+  <div id="section-cosmétique" class="category-section">
+    <div class="row g-4">
+      {% for produit in produits_cosmétique %}
+        {% include 'boutique/produit_card.html' with produit=produit %}
+      {% empty %}
+        <p class="text-center">Aucun produit dans cette catégorie.</p>
+      {% endfor %}
+    </div>
+  </div>
+
 
   <!-- Autres -->
   <div id="section-autres" class="category-section">
